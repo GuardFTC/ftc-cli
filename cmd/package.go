@@ -1,50 +1,13 @@
+// Package cmd @Author:冯铁城 [17615007230@163.com] 2025-07-11 14:41:30
 package cmd
 
 import (
 	"fmt"
 	"os"
 	"os/exec"
-	"runtime"
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
-)
-
-// 定义系统常量
-const windows = "windows"
-const mac = "darwin"
-
-// 系统名称
-var system = runtime.GOOS
-
-// 默认项目
-var defaultProject = "prospect-platform"
-
-// 系统-项目名称-项目配置-Map
-var projectPropertiesMap = map[string]map[string]map[string]string{
-	windows: {
-		defaultProject: {
-			"pom":    "D:/project/java/prospect-platform/parent/pom.xml",
-			"maven":  "D:/base/maven/apache-maven-3.9.9-bin/apache-maven-3.9.9/conf/settings.xml",
-			"output": "D:\\project\\java\\prospect-platform\\output",
-		},
-	},
-	mac: {
-		defaultProject: {
-			"pom":    "",
-			"maven":  "",
-			"output": "",
-		},
-	},
-}
-
-// flag变量
-var (
-	project      string
-	flagPom      string
-	flagMaven    string
-	flagOutput   string
-	listProjects bool
 )
 
 // 打包命令 package java project
@@ -54,8 +17,8 @@ var packageCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		//1.如果打印项目列表，则打印并返回，否则执行打包命令
-		if listProjects {
-			consoleProjectInfos()
+		if packageListProject {
+			consolePackageProjectInfos()
 			return
 		} else {
 			runPackageCommand()
@@ -64,7 +27,7 @@ var packageCmd = &cobra.Command{
 }
 
 // 打印项目信息
-func consoleProjectInfos() {
+func consolePackageProjectInfos() {
 
 	//1.打印分割线
 	fmt.Println("--------------------------------------------------------------------------------")
@@ -75,7 +38,7 @@ func consoleProjectInfos() {
 	fmt.Fprintln(w, "--------------------------------------------------------------------------------")
 
 	//3.打印项目信息
-	for projectName, projectProperties := range projectPropertiesMap[system] {
+	for projectName, projectProperties := range packageCmdProjectPropertiesMap[system] {
 		fmt.Fprintf(w, "| %-18s\t| pom    \t| %-60s\t|\n", projectName, projectProperties["pom"])
 		fmt.Fprintf(w, "| %-18s\t| maven  \t| %-60s\t|\n", "", projectProperties["maven"])
 		fmt.Fprintf(w, "| %-18s\t| output \t| %-60s\t|\n", "", projectProperties["output"])
@@ -90,33 +53,33 @@ func consoleProjectInfos() {
 func runPackageCommand() {
 
 	//1.获取当前系统对应的项目集合
-	systemProjects := projectPropertiesMap[system]
+	systemProjects := packageCmdProjectPropertiesMap[system]
 
 	//2.获取项目配置
 	pom := ""
 	maven := ""
 	output := ""
-	if systemProject, isExist := systemProjects[project]; isExist {
+	if systemProject, isExist := systemProjects[packageProject]; isExist {
 		pom = systemProject["pom"]
 		maven = systemProject["maven"]
 		output = systemProject["output"]
 	}
 
 	//3.读取自定义项目配置参数
-	if flagPom == "" {
-		flagPom = pom
+	if packagePom == "" {
+		packagePom = pom
 	}
-	if flagMaven == "" {
-		flagMaven = maven
+	if packageMaven == "" {
+		packageMaven = maven
 	}
-	if flagOutput == "" {
-		flagOutput = output
+	if packageOutput == "" {
+		packageOutput = output
 	}
 
 	//4.公共参数，减少代码重复
 	baseArgs := []string{
-		"-f", flagPom,
-		"-s", flagMaven,
+		"-f", packagePom,
+		"-s", packageMaven,
 		"-DskipTests=true",
 	}
 
@@ -172,9 +135,9 @@ func openOutPutDir() {
 
 	//2.根据不同系统执行不同命令
 	if system == windows {
-		err = exec.Command("explorer", flagOutput).Start()
+		err = exec.Command("explorer", packageOutput).Start()
 	} else {
-		err = exec.Command("open", flagOutput).Start()
+		err = exec.Command("open", packageOutput).Start()
 	}
 
 	//3.判空打印
@@ -187,11 +150,11 @@ func openOutPutDir() {
 func initPackage() {
 
 	//1.设置Flags
-	packageCmd.Flags().StringVarP(&project, "project", "p", defaultProject, "项目名称（优先使用，如果已在内置列表中，无需指定pom/maven/output）")
-	packageCmd.Flags().StringVarP(&flagPom, "pom", "P", "", "pom.xml 路径（当项目未被记录时需手动指定）")
-	packageCmd.Flags().StringVarP(&flagMaven, "maven", "m", "", "maven settings.xml 路径（当项目未被记录时需手动指定）")
-	packageCmd.Flags().StringVarP(&flagOutput, "output", "o", "", "jar 输出目录（当项目未被记录时需手动指定）")
-	packageCmd.Flags().BoolVarP(&listProjects, "list project", "l", false, "输出内置项目信息")
+	packageCmd.Flags().StringVarP(&packageProject, "project", "p", defaultProject, "项目名称（优先使用，如果已在内置列表中，无需指定pom/maven/output）")
+	packageCmd.Flags().StringVarP(&packagePom, "pom", "P", "", "pom.xml 路径（当项目未被记录时需手动指定）")
+	packageCmd.Flags().StringVarP(&packageMaven, "maven", "m", "", "maven settings.xml 路径（当项目未被记录时需手动指定）")
+	packageCmd.Flags().StringVarP(&packageOutput, "output", "o", "", "jar 输出目录（当项目未被记录时需手动指定）")
+	packageCmd.Flags().BoolVarP(&packageListProject, "list project", "l", false, "输出内置项目信息")
 
 	//2.添加到根命令
 	rootCmd.AddCommand(packageCmd)

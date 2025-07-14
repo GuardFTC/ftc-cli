@@ -22,6 +22,7 @@ func Init() {
 
 	//2.初始化子命令
 	initPackage()
+	initEnv()
 
 	//3.执行根命令
 	if err := rootCmd.Execute(); err != nil {
