@@ -67,12 +67,10 @@ func runEnvCommand() {
 
 	//3.创建阻塞器，类似于Java里面的CountDownLatch
 	var wg sync.WaitGroup
+	wg.Add(len(properties))
 
 	//4.依次执行命令
 	for property, propertyValues := range properties {
-
-		//4.阻塞器+1
-		wg.Add(1)
 
 		//5.创建协程执行命令
 		go func(property string, propertyValues []string) {
