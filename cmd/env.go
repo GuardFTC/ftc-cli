@@ -17,7 +17,7 @@ var envCmd = &cobra.Command{
 	Short: "run project env",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		//1.如果打印项目列表，则打印并返回，否则执行打包命令
+		//1.如果打印项目列表，则打印并返回，否则执行运行环境命令
 		if envListProject {
 			consoleEnvProjectInfos()
 			return
@@ -40,6 +40,8 @@ func consoleEnvProjectInfos() {
 
 	//3.打印项目信息
 	for projectName, projectProperties := range envCmdProjectPropertiesMap[system] {
+
+		//4.定义起始行数，起始行数打印项目名称，其他行数只打印项目属性
 		line := 1
 		for property, propertyValues := range projectProperties {
 			if line == 1 {
