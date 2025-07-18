@@ -3,6 +3,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"sync"
@@ -26,6 +27,17 @@ var envCmd = &cobra.Command{
 			runEnvCommand()
 		}
 	},
+}
+
+// 初始化命令
+func initEnv() {
+
+	//1.设置Flags
+	envCmd.Flags().StringVarP(&envProject, "project", "p", defaultProject, "项目名称")
+	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
+
+	//2.添加到根命令
+	rootCmd.AddCommand(envCmd)
 }
 
 // 打印项目信息
@@ -64,16 +76,22 @@ func runEnvCommand() {
 
 	//1.获取当前系统对应的项目集合
 	systemProjects := envCmdProjectPropertiesMap[system]
+	if systemProjects == nil {
+		log.Fatalf("当前系统不支持env命令: %v\n", system)
+	}
 
 	//2.获取项目配置
-	properties := systemProjects[envProject]
+	systemProject := systemProjects[envProject]
+	if systemProject == nil {
+		log.Fatalf("不支持项目: %v\n", packageProject)
+	}
 
 	//3.创建阻塞器，类似于Java里面的CountDownLatch
 	var wg sync.WaitGroup
-	wg.Add(len(properties))
+	wg.Add(len(systemProject))
 
 	//4.依次执行命令
-	for property, propertyValues := range properties {
+	for property, propertyValues := range systemProject {
 
 		//5.创建协程执行命令
 		go func(property string, propertyValues []string) {
@@ -96,15 +114,4 @@ func runEnvCommand() {
 
 	//9.所有命令完成的提示
 	fmt.Println("所有命令执行完成！")
-}
-
-// 初始化命令
-func initEnv() {
-
-	//1.设置Flags
-	envCmd.Flags().StringVarP(&envProject, "project", "p", defaultProject, "项目名称")
-	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
-
-	//2.添加到根命令
-	rootCmd.AddCommand(envCmd)
 }
