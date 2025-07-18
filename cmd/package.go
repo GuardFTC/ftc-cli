@@ -71,7 +71,7 @@ func runPackageCommand() {
 	//1.获取当前系统对应的项目集合
 	systemProjects := packageCmdProjectPropertiesMap[system]
 	if systemProjects == nil {
-		log.Fatalf("当前系统不支持打包命令: %v\n", system)
+		log.Fatalf("当前系统不支持package命令: %v\n", system)
 	}
 
 	//2.获取项目配置
