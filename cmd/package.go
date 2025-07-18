@@ -93,9 +93,7 @@ func runPackageCommand() {
 	}
 
 	//6.执行完成后，打开目标文件夹
-	if err := openOutPutDir(systemProject); err != nil {
-		log.Fatalf("打开目标文件夹:[%v]失败", packageOutput)
-	}
+	openOutPutDir(systemProject)
 }
 
 // 杀死项目进程
