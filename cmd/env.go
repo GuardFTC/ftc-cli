@@ -9,6 +9,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
+	"go-ftc-console/common"
 )
 
 // envCmd represents the env command
@@ -82,7 +83,7 @@ func runEnvCommand() {
 
 			//7.执行命令
 			fmt.Printf(">>> 执行启动%v命令: %v\n", property, propertyValues)
-			if err := runCommand(propertyValues[0], propertyValues[1:]...); err != nil {
+			if err := common.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
 				fmt.Printf("命令执行失败: %v\n", err)
 				return
 			}

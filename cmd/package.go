@@ -8,6 +8,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
+	"go-ftc-console/common"
 )
 
 // 打包命令 package java project
@@ -97,7 +98,7 @@ func runPackageCommand() {
 		fmt.Printf(">>> 执行第%d条命令: mvn %v\n", i+1, args)
 
 		//8.执行命令，出错则打印并退出
-		if err := runCommand("mvn", args...); err != nil {
+		if err := common.RunCommand("mvn", args...); err != nil {
 			fmt.Printf("命令执行失败: %v\n", err)
 			return
 		}
@@ -111,20 +112,6 @@ func runPackageCommand() {
 
 	//11.执行完成后，打开目标文件夹
 	openOutPutDir()
-}
-
-// 封装执行命令的函数，传入命令名和参数，返回错误
-func runCommand(name string, args ...string) error {
-
-	//1.创建执行命令对象
-	cmd := exec.Command(name, args...)
-
-	//2.标准输出、错误输出重定向到控制台，实时打印
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
-	//3.运行命令，等待完成
-	return cmd.Run()
 }
 
 // 打开目标文件夹
