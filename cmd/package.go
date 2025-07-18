@@ -3,6 +3,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"text/tabwriter"
@@ -25,6 +26,20 @@ var packageCmd = &cobra.Command{
 			runPackageCommand()
 		}
 	},
+}
+
+// 初始化命令
+func initPackage() {
+
+	//1.设置Flags
+	packageCmd.Flags().StringVarP(&packageProject, "project", "p", defaultProject, "项目名称（优先使用，如果已在内置列表中，无需指定pom/maven/output）")
+	packageCmd.Flags().StringVarP(&packagePom, "pom", "P", "", "pom.xml 路径（当项目未被记录时需手动指定）")
+	packageCmd.Flags().StringVarP(&packageMaven, "maven", "m", "", "maven settings.xml 路径（当项目未被记录时需手动指定）")
+	packageCmd.Flags().StringVarP(&packageOutput, "output", "o", "", "jar 输出目录（当项目未被记录时需手动指定）")
+	packageCmd.Flags().BoolVarP(&packageListProject, "list project", "l", false, "输出内置项目信息")
+
+	//2.添加到根命令
+	rootCmd.AddCommand(packageCmd)
 }
 
 // 打印项目信息
@@ -55,94 +70,119 @@ func runPackageCommand() {
 
 	//1.获取当前系统对应的项目集合
 	systemProjects := packageCmdProjectPropertiesMap[system]
+	if systemProjects == nil {
+		log.Fatalf("当前系统不支持打包命令: %v\n", system)
+	}
 
 	//2.获取项目配置
-	pom := ""
-	maven := ""
-	output := ""
-	if systemProject, isExist := systemProjects[packageProject]; isExist {
-		pom = systemProject["pom"]
-		maven = systemProject["maven"]
-		output = systemProject["output"]
+	systemProject := systemProjects[packageProject]
+	if systemProject == nil {
+		log.Fatalf("不支持项目: %v\n", packageProject)
 	}
 
-	//3.读取自定义项目配置参数
+	//3.终止项目进程，确保打包不受影响
+	if err := killProjectJavaProcess(systemProject); err != nil {
+		log.Fatalf("无法结束项目Java进程: %v\n", err)
+	}
+
+	//4.获取maven命令集合
+	commands := getMavenCommands(systemProject)
+
+	//5.执行maven命令
+	if err := runMavenCommands(commands); err != nil {
+		return
+	}
+
+	//6.执行完成后，打开目标文件夹
+	if err := openOutPutDir(systemProject); err != nil {
+		log.Fatalf("打开目标文件夹:[%v]失败", packageOutput)
+	}
+}
+
+// kill项目java进程
+func killProjectJavaProcess(systemProject map[string][]string) error {
+
+	//1.获取kill项
+	killItems := common.GetProjectItems(systemProject, "kill")
+
+	//2.执行命令 kill 项目Java进程
+	if err := exec.Command(killItems[0], killItems[1:]...).Start(); err != nil {
+		return err
+	}
+
+	//3.默认返回
+	return nil
+}
+
+// 获取Maven命令集合
+func getMavenCommands(systemProject map[string][]string) [][]string {
+
+	//1.如果自定义项目配置为空，那么使用项目配置覆盖自定义配置
 	if packagePom == "" {
-		packagePom = pom
+		packagePom = common.GetProjectItems(systemProject, "pom")[0]
 	}
 	if packageMaven == "" {
-		packageMaven = maven
+		packageMaven = common.GetProjectItems(systemProject, "maven")[0]
 	}
 	if packageOutput == "" {
-		packageOutput = output
+		packageOutput = common.GetProjectItems(systemProject, "output")[1]
 	}
 
-	//4.公共参数，减少代码重复
+	//2.定义公共参数，减少代码重复
 	baseArgs := []string{
 		"-f", packagePom,
 		"-s", packageMaven,
 		"-DskipTests=true",
 	}
 
-	//5.按顺序定义三个命令，clean、install、package
+	//3.按顺序定义三个命令，clean、install、package
 	commands := [][]string{
 		append([]string{"clean"}, baseArgs...),
 		append([]string{"install"}, baseArgs...),
 		append([]string{"package"}, baseArgs...),
 	}
 
-	//6.依次执行命令
+	//4.返回命令集合
+	return commands
+}
+
+// 运行Maven命令
+func runMavenCommands(commands [][]string) error {
+
+	//1.依次执行命令
 	for i, args := range commands {
 
-		//7.打印当前执行的命令序号和参数
+		//2.打印当前执行的命令序号和参数
 		fmt.Printf(">>> 执行第%d条命令: mvn %v\n", i+1, args)
 
-		//8.执行命令，出错则打印并退出
+		//3.执行命令，出错则打印并退出
 		if err := common.RunCommand("mvn", args...); err != nil {
 			fmt.Printf("命令执行失败: %v\n", err)
-			return
+			return err
 		}
 
-		//9.成功时打印提示
+		//4.成功时打印提示
 		fmt.Printf("第%d条命令执行成功\n\n", i+1)
 	}
 
-	//10.所有命令完成的提示
+	//5.所有命令完成的提示
 	fmt.Println("所有命令执行完成！")
 
-	//11.执行完成后，打开目标文件夹
-	openOutPutDir()
+	//6.默认返回
+	return nil
 }
 
 // 打开目标文件夹
-func openOutPutDir() {
+func openOutPutDir(systemProject map[string][]string) error {
 
-	//1.定义异常
-	var err error
+	//1.获取output项
+	openCommand := common.GetProjectItems(systemProject, "output")[0]
 
 	//2.根据不同系统执行不同命令
-	if system == windows {
-		err = exec.Command("explorer", packageOutput).Start()
-	} else {
-		err = exec.Command("open", packageOutput).Start()
+	if err := exec.Command(openCommand, packageOutput).Start(); err != nil {
+		return err
 	}
 
-	//3.判空打印
-	if err != nil {
-		fmt.Printf("打开文件夹失败: %v\n", err)
-	}
-}
-
-// 初始化命令
-func initPackage() {
-
-	//1.设置Flags
-	packageCmd.Flags().StringVarP(&packageProject, "project", "p", defaultProject, "项目名称（优先使用，如果已在内置列表中，无需指定pom/maven/output）")
-	packageCmd.Flags().StringVarP(&packagePom, "pom", "P", "", "pom.xml 路径（当项目未被记录时需手动指定）")
-	packageCmd.Flags().StringVarP(&packageMaven, "maven", "m", "", "maven settings.xml 路径（当项目未被记录时需手动指定）")
-	packageCmd.Flags().StringVarP(&packageOutput, "output", "o", "", "jar 输出目录（当项目未被记录时需手动指定）")
-	packageCmd.Flags().BoolVarP(&packageListProject, "list project", "l", false, "输出内置项目信息")
-
-	//2.添加到根命令
-	rootCmd.AddCommand(packageCmd)
+	//3.默认返回
+	return nil
 }

@@ -2,6 +2,7 @@
 package common
 
 import (
+	"log"
 	"os"
 	"os/exec"
 )
@@ -18,4 +19,19 @@ func RunCommand(name string, args ...string) error {
 
 	//3.运行命令，等待完成
 	return cmd.Run()
+}
+
+// GetProjectItems 获取项目配置项
+func GetProjectItems(project map[string][]string, key string) []string {
+
+	//1.获取项目配置项
+	projectItems := project[key]
+
+	//2.配置项判空
+	if projectItems == nil || len(projectItems) == 0 {
+		log.Fatalf("项目不包含配置项:%s\n", key)
+	}
+
+	//3.返回
+	return projectItems
 }

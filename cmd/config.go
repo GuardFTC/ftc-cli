@@ -29,19 +29,21 @@ var (
 )
 
 // package命令 系统-项目名称-项目配置-Map
-var packageCmdProjectPropertiesMap = map[string]map[string]map[string]string{
+var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	windows: {
 		defaultProject: {
-			"pom":    "D:/project/java/prospect-platform/parent/pom.xml",
-			"maven":  "D:/base/maven/apache-maven-3.9.9-bin/apache-maven-3.9.9/conf/settings.xml",
-			"output": "D:\\project\\java\\prospect-platform\\output",
+			"pom":    {"D:/project/java/prospect-platform/parent/pom.xml"},
+			"maven":  {"D:/base/maven/apache-maven-3.9.9-bin/apache-maven-3.9.9/conf/settings.xml"},
+			"output": {"explorer", "D:\\project\\java\\prospect-platform\\output"},
+			"kill":   {"cmd", "/c", "for /f \"tokens=1\" %i in ('jps -l ^| find \"prospect\"') do taskkill /PID %i /F"},
 		},
 	},
 	mac: {
 		defaultProject: {
-			"pom":    "",
-			"maven":  "",
-			"output": "",
+			"pom":    {},
+			"maven":  {},
+			"output": {"open"},
+			"kill":   {"bash", "-c", "jps -l | grep prospect | awk '{print $1}' | xargs kill -9"},
 		},
 	},
 }
