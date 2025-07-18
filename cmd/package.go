@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
@@ -81,7 +80,7 @@ func runPackageCommand() {
 	}
 
 	//3.终止项目进程，确保打包不受影响
-	if err := killProjectJavaProcess(systemProject); err != nil {
+	if err := killProjectProcess(systemProject); err != nil {
 		log.Fatalf("无法结束项目Java进程: %v\n", err)
 	}
 
@@ -99,14 +98,14 @@ func runPackageCommand() {
 	}
 }
 
-// kill项目java进程
-func killProjectJavaProcess(systemProject map[string][]string) error {
+// 杀死项目进程
+func killProjectProcess(project map[string][]string) error {
 
-	//1.获取kill项
-	killItems := common.GetProjectItems(systemProject, "kill")
+	//1.获取kill配置项
+	killItems := common.GetProjectItems(project, "kill")
 
-	//2.执行命令 kill 项目Java进程
-	if err := exec.Command(killItems[0], killItems[1:]...).Start(); err != nil {
+	//2.杀死项目进程
+	if err := common.KillProcess(killItems[0], killItems[1]); err != nil {
 		return err
 	}
 
@@ -173,13 +172,13 @@ func runMavenCommands(commands [][]string) error {
 }
 
 // 打开目标文件夹
-func openOutPutDir(systemProject map[string][]string) error {
+func openOutPutDir(project map[string][]string) error {
 
 	//1.获取output项
-	openCommand := common.GetProjectItems(systemProject, "output")[0]
+	openCommand := common.GetProjectItems(project, "output")[0]
 
-	//2.根据不同系统执行不同命令
-	if err := exec.Command(openCommand, packageOutput).Start(); err != nil {
+	//2.执行命令打开文件夹
+	if err := common.RunCommand(openCommand, packageOutput); err != nil {
 		return err
 	}
 

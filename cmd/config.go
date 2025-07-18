@@ -35,7 +35,7 @@ var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			"pom":    {"D:/project/java/prospect-platform/parent/pom.xml"},
 			"maven":  {"D:/base/maven/apache-maven-3.9.9-bin/apache-maven-3.9.9/conf/settings.xml"},
 			"output": {"explorer", "D:\\project\\java\\prospect-platform\\output"},
-			"kill":   {"cmd", "/c", "for /f \"tokens=1\" %i in ('jps -l ^| find \"prospect\"') do taskkill /PID %i /F"},
+			"kill":   {"java", "prospect."},
 		},
 	},
 	mac: {
@@ -43,7 +43,7 @@ var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			"pom":    {},
 			"maven":  {},
 			"output": {"open"},
-			"kill":   {"bash", "-c", "jps -l | grep prospect | awk '{print $1}' | xargs kill -9"},
+			"kill":   {"java", "prospect."},
 		},
 	},
 }
