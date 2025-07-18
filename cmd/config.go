@@ -1,4 +1,4 @@
-// @Author:冯铁城 [17615007230@163.com] 2025-07-14 17:01:53
+// Package cmd @Author:冯铁城 [17615007230@163.com] 2025-07-14 17:01:53
 package cmd
 
 import "runtime"

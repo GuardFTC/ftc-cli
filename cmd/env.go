@@ -83,7 +83,7 @@ func runEnvCommand() {
 	//2.获取项目配置
 	systemProject := systemProjects[envProject]
 	if systemProject == nil {
-		log.Fatalf("不支持项目: %v\n", packageProject)
+		log.Fatalf("不支持项目: %v\n", envProject)
 	}
 
 	//3.创建阻塞器，类似于Java里面的CountDownLatch
