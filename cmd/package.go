@@ -56,7 +56,7 @@ func consolePackageProjectInfos() {
 	for projectName, projectProperties := range packageCmdProjectPropertiesMap[system] {
 		fmt.Fprintf(w, "| %-18s\t| pom    \t| %-60s\t|\n", projectName, projectProperties["pom"])
 		fmt.Fprintf(w, "| %-18s\t| maven  \t| %-60s\t|\n", "", projectProperties["maven"])
-		fmt.Fprintf(w, "| %-18s\t| output \t| %-60s\t|\n", "", projectProperties["output"])
+		fmt.Fprintf(w, "| %-18s\t| output \t| [%-60s]\t|\n", "", projectProperties["output"][1])
 		fmt.Fprintln(w, "--------------------------------------------------------------------------------")
 	}
 
