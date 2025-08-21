@@ -37,6 +37,12 @@ var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			"output": {"explorer", "D:\\project\\java\\prospect-platform\\output"},
 			"kill":   {"java", "prospect."},
 		},
+		"logging-mon": {
+			"pom":    {"D:/project/java/logging-mon/pom.xml"},
+			"maven":  {"D:/base/maven/apache-maven-3.9.9-bin/apache-maven-3.9.9/conf/settings.xml"},
+			"output": {"explorer", "D:\\project\\java\\logging-mon\\output"},
+			"kill":   {"java", "logging-mon"},
+		},
 	},
 	mac: {
 		defaultProject: {
