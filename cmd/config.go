@@ -72,10 +72,6 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"-Dsentinel.dashboard.auth.password=VI7O8ezi18kaYiQupoT2tohAw4mOLi",
 				"-jar", "D:\\base\\sentinel\\sentinel-dashboard-1.8.8.jar",
 			},
-			"redis": {
-				"cmd",
-				"/C", `D:\base\redis\redis-server.exe`,
-			},
 		},
 	},
 	mac: {
