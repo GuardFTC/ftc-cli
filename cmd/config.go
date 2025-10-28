@@ -60,7 +60,7 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 		defaultProject: {
 			"nacos": {
 				"cmd",
-				"/C", `D:\base\nacos\bin\startup.cmd`,
+				"/C", "C:\\Users\\Administrator\\base\\nacos\\bin\\startup.cmd",
 				"-m", "standalone",
 			},
 			"sentinel": {
@@ -70,7 +70,7 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"-Dproject.name=Platform",
 				"-Dsentinel.dashboard.auth.username=platform",
 				"-Dsentinel.dashboard.auth.password=VI7O8ezi18kaYiQupoT2tohAw4mOLi",
-				"-jar", "D:\\base\\sentinel\\sentinel-dashboard-1.8.8.jar",
+				"-jar", "C:\\Users\\Administrator\\base\\sentinel\\sentinel-dashboard-1.8.8.jar",
 			},
 		},
 	},
