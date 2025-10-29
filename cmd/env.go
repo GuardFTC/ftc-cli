@@ -9,8 +9,9 @@ import (
 	"sync"
 	"text/tabwriter"
 
-	"github.com/spf13/cobra"
 	"go-ftc-console/common"
+
+	"github.com/spf13/cobra"
 )
 
 // envCmd represents the env command
