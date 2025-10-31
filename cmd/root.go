@@ -2,6 +2,8 @@
 package cmd
 
 import (
+	"go-ftc-console/cmd/env"
+	_package "go-ftc-console/cmd/package"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -21,8 +23,8 @@ func Init() {
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 
 	//2.初始化子命令
-	initPackage()
-	initEnv()
+	rootCmd.AddCommand(env.NewEnvCommand())
+	rootCmd.AddCommand(_package.NewPackageCommand())
 
 	//3.执行根命令
 	if err := rootCmd.Execute(); err != nil {

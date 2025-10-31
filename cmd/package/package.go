@@ -1,5 +1,5 @@
-// Package cmd @Author:冯铁城 [17615007230@163.com] 2025-07-11 14:41:30
-package cmd
+// Package _package @Author:冯铁城 [17615007230@163.com] 2025-07-11 14:41:30
+package _package
 
 import (
 	"fmt"
@@ -7,9 +7,24 @@ import (
 	"os"
 	"text/tabwriter"
 
-	"github.com/spf13/cobra"
 	"go-ftc-console/common"
+
+	"github.com/spf13/cobra"
 )
+
+// NewPackageCommand 创建package命令
+func NewPackageCommand() *cobra.Command {
+
+	//1.设置Flags
+	packageCmd.Flags().StringVarP(&packageProject, "project", "p", defaultProject, "项目名称（优先使用，如果已在内置列表中，无需指定pom/maven/output）")
+	packageCmd.Flags().StringVarP(&packagePom, "pom", "P", "", "pom.xml 路径（当项目未被记录时需手动指定）")
+	packageCmd.Flags().StringVarP(&packageMaven, "maven", "m", "", "maven settings.xml 路径（当项目未被记录时需手动指定）")
+	packageCmd.Flags().StringVarP(&packageOutput, "output", "o", "", "jar 输出目录（当项目未被记录时需手动指定）")
+	packageCmd.Flags().BoolVarP(&packageListProject, "list project", "l", false, "输出内置项目信息")
+
+	//2.返回
+	return packageCmd
+}
 
 // 打包命令 package java project
 var packageCmd = &cobra.Command{
@@ -25,20 +40,6 @@ var packageCmd = &cobra.Command{
 			runPackageCommand()
 		}
 	},
-}
-
-// 初始化命令
-func initPackage() {
-
-	//1.设置Flags
-	packageCmd.Flags().StringVarP(&packageProject, "project", "p", defaultProject, "项目名称（优先使用，如果已在内置列表中，无需指定pom/maven/output）")
-	packageCmd.Flags().StringVarP(&packagePom, "pom", "P", "", "pom.xml 路径（当项目未被记录时需手动指定）")
-	packageCmd.Flags().StringVarP(&packageMaven, "maven", "m", "", "maven settings.xml 路径（当项目未被记录时需手动指定）")
-	packageCmd.Flags().StringVarP(&packageOutput, "output", "o", "", "jar 输出目录（当项目未被记录时需手动指定）")
-	packageCmd.Flags().BoolVarP(&packageListProject, "list project", "l", false, "输出内置项目信息")
-
-	//2.添加到根命令
-	rootCmd.AddCommand(packageCmd)
 }
 
 // 打印项目信息

@@ -1,5 +1,5 @@
-// Package cmd @Author:冯铁城 [17615007230@163.com] 2025-07-11 14:41:30
-package cmd
+// Package env Package cmd @Author:冯铁城 [17615007230@163.com] 2025-07-11 14:41:30
+package env
 
 import (
 	"fmt"
@@ -13,6 +13,17 @@ import (
 
 	"github.com/spf13/cobra"
 )
+
+// NewEnvCommand 创建env命令
+func NewEnvCommand() *cobra.Command {
+
+	//1.设置Flags
+	envCmd.Flags().StringVarP(&envProject, "project", "p", defaultProject, "项目名称")
+	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
+
+	//2.返回
+	return envCmd
+}
 
 // envCmd represents the env command
 var envCmd = &cobra.Command{
@@ -28,17 +39,6 @@ var envCmd = &cobra.Command{
 			runEnvCommand()
 		}
 	},
-}
-
-// 初始化命令
-func initEnv() {
-
-	//1.设置Flags
-	envCmd.Flags().StringVarP(&envProject, "project", "p", defaultProject, "项目名称")
-	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
-
-	//2.添加到根命令
-	rootCmd.AddCommand(envCmd)
 }
 
 // 打印项目信息

@@ -1,5 +1,5 @@
-// Package cmd @Author:冯铁城 [17615007230@163.com] 2025-07-14 17:01:53
-package cmd
+// Package _package @Author:冯铁城 [17615007230@163.com] 2025-10-31 19:34:04
+package _package
 
 import "runtime"
 
@@ -15,17 +15,11 @@ var defaultProject = "prospect-platform"
 
 // flag变量
 var (
-
-	// package命令相关flag变量
 	packageProject     string
 	packagePom         string
 	packageMaven       string
 	packageOutput      string
 	packageListProject bool
-
-	// env命令相关flag变量
-	envProject     string
-	envListProject bool
 )
 
 // package命令 系统-项目名称-项目配置-Map
@@ -50,38 +44,6 @@ var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			"maven":  {},
 			"output": {"open"},
 			"kill":   {"java", "prospect."},
-		},
-	},
-}
-
-// env命令 系统-项目名称-项目配置-Map
-var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
-	windows: {
-		defaultProject: {
-			"nacos": {
-				"cmd",
-				"/C", "C:\\Users\\Administrator\\base\\nacos\\bin\\startup.cmd",
-				"-m", "standalone",
-			},
-			"sentinel": {
-				"java",
-				"-Dserver.port=8849",
-				"-Dcsp.sentinel.dashboard.server=0.0.0.0:8849",
-				"-Dproject.name=Platform",
-				"-Dsentinel.dashboard.auth.username=platform",
-				"-Dsentinel.dashboard.auth.password=VI7O8ezi18kaYiQupoT2tohAw4mOLi",
-				"-jar", "C:\\Users\\Administrator\\base\\sentinel\\sentinel-dashboard-1.8.8.jar",
-			},
-			"redis": {
-				"cmd",
-				"/C", `C:\Users\Administrator\base\redis\redis-server.exe`,
-			},
-		},
-	},
-	mac: {
-		defaultProject: {
-			"nacos":    {},
-			"sentinel": {},
 		},
 	},
 }
