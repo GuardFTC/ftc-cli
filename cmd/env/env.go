@@ -14,6 +14,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// flag变量
+var (
+	envProject     string
+	envListProject bool
+)
+
 // NewEnvCommand 创建env命令
 func NewEnvCommand() *cobra.Command {
 

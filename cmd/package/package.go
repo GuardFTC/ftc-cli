@@ -12,6 +12,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// flag变量
+var (
+	packageProject     string
+	packagePom         string
+	packageMaven       string
+	packageOutput      string
+	packageListProject bool
+)
+
 // NewPackageCommand 创建package命令
 func NewPackageCommand() *cobra.Command {
 

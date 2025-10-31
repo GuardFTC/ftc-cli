@@ -13,15 +13,6 @@ var system = runtime.GOOS
 // 默认项目
 var defaultProject = "prospect-platform"
 
-// flag变量
-var (
-	packageProject     string
-	packagePom         string
-	packageMaven       string
-	packageOutput      string
-	packageListProject bool
-)
-
 // package命令 系统-项目名称-项目配置-Map
 var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	windows: {
