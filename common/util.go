@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 
 	"github.com/shirou/gopsutil/v3/process"
@@ -78,4 +79,10 @@ func KillProcess(nameContains string, cmdContains string) error {
 
 	//6.默认返回
 	return nil
+}
+
+// IsNumeric 判断是否为数字
+func IsNumeric(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
 }

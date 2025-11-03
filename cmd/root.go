@@ -4,6 +4,7 @@ package cmd
 import (
 	"go-ftc-console/cmd/env"
 	_package "go-ftc-console/cmd/package"
+	"go-ftc-console/cmd/sql"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -25,6 +26,7 @@ func Init() {
 	//2.初始化子命令
 	rootCmd.AddCommand(env.NewEnvCommand())
 	rootCmd.AddCommand(_package.NewPackageCommand())
+	rootCmd.AddCommand(sql.NewSqlCommand())
 
 	//3.执行根命令
 	if err := rootCmd.Execute(); err != nil {
