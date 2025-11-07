@@ -30,4 +30,24 @@ var tableColumnMap = map[string][]string{
 		"ua180", "ua210", "ua240", "ua270",
 		"ua300", "ua330", "ua360",
 	},
+	"ads_bi_af_overview_d_i": {
+		"game_id", "data_type", "dt", "platform", "country",
+		"media_source", "ad_material", "campaign", "campaign_id", "is_include_org",
+		"nu", "ua1", "ua7", "ua30", "click", "cost", "impression", "rev0", "rev1", "rev7", "rev30",
+		"td_iaarev", "td_iaprev", "device_launch", "inter_imp", "reward_imp", "inter_rev",
+		"reward_rev", "cnt_level",
+	},
+	"ads_bi_af_material_d_i": {
+		"game_id", "dt", "data_type", "platform", "country", "media_source", "ad_material",
+		"nu", "rev0", "rev1", "rev7", "rev30", "ua1", "ua7", "ua30",
+		"td_iaarev", "td_iaprev", "device_launch", "click", "impression", "cost",
+		"total_cost", "total_days", "total_nu", "total_iaarev", "total_iaprev",
+	},
+	"ads_bi_af_campaign_d_i": {
+		"game_id", "dt", "data_type", "platform", "country", "media_source",
+		"ad_type", "campaign", "campaign_id",
+		"nu", "rev0", "rev1", "rev7", "rev30", "ua1", "ua7", "ua30",
+		"td_iaarev", "td_iaprev", "device_launch", "click", "impression", "cost",
+		"total_cost", "total_days", "total_nu", "total_iaarev", "total_iaprev",
+	},
 }
