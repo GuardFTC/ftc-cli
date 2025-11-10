@@ -50,4 +50,19 @@ var tableColumnMap = map[string][]string{
 		"td_iaarev", "td_iaprev", "device_launch", "click", "impression", "cost",
 		"total_cost", "total_days", "total_nu", "total_iaarev", "total_iaprev",
 	},
+	"ads_bi_all_overview_d_i": {
+		"game_id", "target_day", "data_type", "platform", "country", "media_source",
+		"total_device", "total_iaprev", "total_iaarev",
+		"cnt_level", "inter_imp", "reward_imp",
+		"inter_rev", "reward_rev", "new_device", "old_device",
+		"new_iaprev", "old_iaprev", "new_iaarev", "old_iaarev",
+		"new_duration", "old_duration",
+	},
+	"ads_bi_live_data_d_i": {
+		"game_id", "create_dt", "dt", "platform", "country", "media_source",
+		"create_version_code", "is_org", "living_days",
+		"au", "iaa_rev", "iap_rev", "all_rev", "cnt_level",
+		"duration", "inter_rev", "reward_rev",
+		"inter_imp", "reward_imp",
+	},
 }
