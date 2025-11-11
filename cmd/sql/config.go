@@ -65,4 +65,26 @@ var tableColumnMap = map[string][]string{
 		"duration", "inter_rev", "reward_rev",
 		"inter_imp", "reward_imp",
 	},
+	"ads_bi_payinfo_product_d_i": {
+		"game_id", "target_day", "channel_id", "country",
+		"product_id", "product_name", "payed_user", "payed_times", "payed_total",
+	},
+	"ads_bi_payinfo_rn_d_i": {
+		"game_id", "target_day", "channel_id", "country",
+		"product_id", "product_name", "product_times", "product_count",
+	},
+	"ads_bi_payinfo_whale_d_i": {
+		"game_id", "target_day", "channel_id", "country",
+		"device_id", "server_id", "user_id", "role_id", "role_name",
+		"first_login_day", "last_login_day",
+		"payed_total",
+	},
+	"ads_bi_ad_revenue_d_i": {
+		"game_id", "dt", "data_type", "platform", "ad_type", "country",
+		"ad_unit_id",
+		"imp", "rev", "dau",
+		"load_success", "start_load",
+		"display_start", "display", "display_finish",
+		"nextday_user", "today_user",
+	},
 }
