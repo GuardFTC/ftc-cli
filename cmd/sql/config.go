@@ -59,11 +59,11 @@ var tableColumnMap = map[string][]string{
 		"new_duration", "old_duration",
 	},
 	"ads_bi_live_data_d_i": {
-		"game_id", "create_dt", "data_type", "platform", "country", "media_source",
+		"game_id", "create_dt", "data_type", "platform", "country", "media_source", "campaign",
 		"create_version_code", "is_org", "living_days",
 		"au", "iaa_rev", "iap_rev", "all_rev", "cnt_level",
-		"duration", "inter_rev", "reward_rev",
-		"inter_imp", "reward_imp",
+		"duration", "inter_rev", "reward_rev", "inter_imp",
+		"reward_imp", "version_spend",
 	},
 	"ads_bi_payinfo_product_d_i": {
 		"game_id", "target_day", "channel_id", "country",
