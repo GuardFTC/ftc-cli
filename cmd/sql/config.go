@@ -87,4 +87,16 @@ var tableColumnMap = map[string][]string{
 		"display_start", "display", "display_finish",
 		"nextday_user", "today_user",
 	},
+	"channel_material": {
+		"id", "day_time", "log_time", "date_time", "ts", "game_id",
+		"platform", "data_type", "country", "media_source", "account_id", "account_name",
+		"campaign", "campaign_id", "ad_set_name", "ad_set_id", "ad_name", "ad_id",
+		"clicks", "impressions", "spend",
+	},
+	"af_pull_channel": {
+		"id", "day_time", "log_time", "date_time", "ts", "game_id",
+		"platform", "data_type", "country", "media_source", "agency",
+		"campaign", "ad_group", "ad_type", "ad_create_time",
+		"impressions", "clicks", "cost",
+	},
 }
