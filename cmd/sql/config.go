@@ -99,4 +99,11 @@ var tableColumnMap = map[string][]string{
 		"campaign", "ad_group", "ad_type", "ad_create_time",
 		"impressions", "clicks", "cost",
 	},
+	"ads_af_s2s_event_d_i": {
+		"id", "day_time",
+		"event_name", "event_value", "event_time",
+		"device_id", "create_dt", "appsflyer_id",
+		"queued", "processed",
+		"platform",
+	},
 }
