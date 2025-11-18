@@ -106,4 +106,9 @@ var tableColumnMap = map[string][]string{
 		"queued", "processed",
 		"platform",
 	},
+	"ads_bi_instantly_d_i": {
+		"game_id", "target_day", "data_type", "target_time",
+		"platform", "country", "media_source",
+		"total_device",
+	},
 }
