@@ -21,17 +21,19 @@ var (
 	db         string
 	table      string
 	listTable  bool
+	path       string
 )
 
 // NewSqlCommand 创建sql命令
 func NewSqlCommand() *cobra.Command {
 
 	//1.设置Flags
-	sqlCmd.Flags().StringVarP(&csvFile, "csvFile", "c", "", "CSV文件路径")
-	sqlCmd.Flags().StringVarP(&outputFile, "outputFile", "o", "", "输出文件路径")
+	sqlCmd.Flags().StringVarP(&csvFile, "csvFile", "c", "", "CSV文件名")
+	sqlCmd.Flags().StringVarP(&outputFile, "outputFile", "o", "", "输出文件名")
 	sqlCmd.Flags().StringVarP(&db, "db", "d", "", "数据库")
 	sqlCmd.Flags().StringVarP(&table, "table", "t", "", "表")
 	sqlCmd.Flags().BoolVarP(&listTable, "list table", "l", false, "输出内置表信息")
+	sqlCmd.Flags().StringVarP(&path, "path", "p", "", "默认文件路径")
 
 	//2.返回
 	return sqlCmd
@@ -130,10 +132,13 @@ func getReader() (error, *csv.Reader, *os.File) {
 	if csvFile == "" {
 		return errors.New("请指定CSV文件"), nil, nil
 	}
+	if path == "" {
+		path = defaultPath
+	}
 
 	//2.打开 CSV 文件
-	fmt.Printf("CSV文件路径: %s\n", csvFile)
-	file, err := os.Open(csvFile)
+	fmt.Printf("CSV文件路径: %s\n", defaultPath+csvFile)
+	file, err := os.Open(defaultPath + csvFile)
 	if err != nil {
 		fmt.Printf("打开 CSV 文件失败:%s", err)
 		return err, nil, nil
@@ -157,10 +162,13 @@ func getWriter() (error, *os.File, *bufio.Writer) {
 	if outputFile == "" {
 		outputFile = defaultOutput
 	}
+	if path == "" {
+		path = defaultPath
+	}
 
 	//2.打开输出文件
-	fmt.Printf("输出文件路径: %s\n", outputFile)
-	sqlFile, err := os.Create(outputFile)
+	fmt.Printf("输出文件路径: %s\n", path+outputFile)
+	sqlFile, err := os.Create(path + outputFile)
 	if err != nil {
 		fmt.Printf("创建输出文件失败:%s", err)
 		return err, nil, nil

@@ -1,8 +1,10 @@
 // Package sql @Author:冯铁城 [17615007230@163.com] 2025-10-31 19:47:32
 package sql
 
+var defaultPath = "C:\\Users\\Administrator\\Downloads\\"
+
 // 默认输出文件路径
-var defaultOutput = "C:\\Users\\Administrator\\Downloads\\output.sql"
+var defaultOutput = "output.sql"
 
 // 默认数据库
 var defaultDB = "dw_tile"
@@ -130,5 +132,30 @@ var tableColumnMap = map[string][]string{
 		"inter_imp0", "inter_imp1", "inter_imp2", "inter_imp3", "inter_imp4", "inter_imp5", "inter_imp6", "inter_imp7", "inter_imp14", "inter_imp30", "inter_imp60", "inter_imp90", "inter_imp120", "inter_imp150", "inter_imp180", "inter_imp210", "inter_imp240",
 		"reward_rev0", "reward_rev1", "reward_rev2", "reward_rev3", "reward_rev4", "reward_rev5", "reward_rev6", "reward_rev7", "reward_rev14", "reward_rev30", "reward_rev60", "reward_rev90", "reward_rev120", "reward_rev150", "reward_rev180", "reward_rev210", "reward_rev240",
 		"inter_rev0", "inter_rev1", "inter_rev2", "inter_rev3", "inter_rev4", "inter_rev5", "inter_rev6", "inter_rev7", "inter_rev14", "inter_rev30", "inter_rev60", "inter_rev90", "inter_rev120", "inter_rev150", "inter_rev180", "inter_rev210", "inter_rev240",
+	},
+	"ads_bi_phone_os_d_i": {
+		"platform", "os_version", "os_count", "os_weight",
+	},
+	"ads_bi_phone_ram_d_i": {
+		"ram", "ram_count", "ram_weight",
+	},
+	"ads_bi_phone_cpu_d_i": {
+		"x86_count", "arm32_count", "x86_weight", "arm32_weight", "all_count",
+	},
+	"ads_bi_phone_outflow_d_i": {
+		"target_day",
+		"channel_id", "platform", "country", "media_source",
+		"campaign", "ad_material", "version_name",
+		"event_code", "device_count",
+	},
+	"ads_bi_phone_duration_d_i": {
+		"channel_id", "country", "target_day",
+		"days", "login_user", "duration",
+		"login_times", "duration_first",
+	},
+	"ads_bi_phone_launch_d_i": {
+		"target_day",
+		"channel_id", "platform", "country",
+		"event_code", "version_name", "log_cnt",
 	},
 }
