@@ -158,4 +158,9 @@ var tableColumnMap = map[string][]string{
 		"channel_id", "platform", "country",
 		"event_code", "version_name", "log_cnt",
 	},
+	"ads_bi_online_d_i": {
+		"game_id", "target_day", "data_type",
+		"target_time", "channel_id", "server_id",
+		"online_count",
+	},
 }
