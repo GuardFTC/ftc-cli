@@ -178,4 +178,10 @@ var tableColumnMap = map[string][]string{
 		"inter_rev0", "inter_rev1", "inter_rev2", "inter_rev3", "inter_rev4", "inter_rev5", "inter_rev6", "inter_rev7", "inter_rev14", "inter_rev30", "inter_rev60", "inter_rev90", "inter_rev120", "inter_rev150", "inter_rev180", "inter_rev210", "inter_rev240",
 		"reward_rev0", "reward_rev1", "reward_rev2", "reward_rev3", "reward_rev4", "reward_rev5", "reward_rev6", "reward_rev7", "reward_rev14", "reward_rev30", "reward_rev60", "reward_rev90", "reward_rev120", "reward_rev150", "reward_rev180", "reward_rev210", "reward_rev240",
 	},
+	"ads_bi_contrast_active_d_i": {
+		"game_id", "device_id", "create_dt", "live_dt",
+		"platform", "media_source", "country", "version_code", "campaign",
+		"living_days", "level_num", "online_time",
+		"inter_num", "reward_num", "inter_rev", "reward_rev", "all_revenue",
+	},
 }
