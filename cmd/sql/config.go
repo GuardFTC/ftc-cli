@@ -59,6 +59,7 @@ var tableColumnMap = map[string][]string{
 		"inter_rev", "reward_rev", "new_device", "old_device",
 		"new_iaprev", "old_iaprev", "new_iaarev", "old_iaarev",
 		"new_duration", "old_duration",
+		"total_pay_device", "total_iappay_device", "total_iaapay_device",
 	},
 	"ads_bi_live_data_d_i": {
 		"game_id", "create_dt", "data_type", "platform", "country", "media_source", "campaign",
