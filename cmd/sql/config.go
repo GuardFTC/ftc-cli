@@ -186,7 +186,7 @@ var tableColumnMap = map[string][]string{
 		"inter_num", "reward_num", "inter_rev", "reward_rev", "all_revenue",
 	},
 	"ads_abtest_result_d_i": {
-		"game_id", "data_type", "start_day_time", "last_day_time", "version_code", "test_tag", "group_ab", "test_name", "country_type", "platform", "campaign_type",
+		"game_id", "data_type", "sion_type", "sion_value", "start_day_time", "last_day_time", "version_code", "test_tag", "group_ab", "test_name", "platform",
 		"dev1_alll", "dev2_alll", "dev3_alll", "dev4_alll", "dev7_alll", "dev14_alll",
 		"dev1_all", "dev2_all", "dev3_all", "dev4_all", "dev7_all", "dev14_all",
 		"dev1_all_fangcha", "dev2_all_fangcha", "dev3_all_fangcha", "dev4_all_fangcha", "dev7_all_fangcha", "dev14_all_fangcha",
