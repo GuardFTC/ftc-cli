@@ -209,5 +209,9 @@ var tableColumnMap = map[string][]string{
 		"ecpm_fangcha", "ecpm_ex0_fangcha", "ecpm_all_fangcha", "reward_ecpm_fangcha", "inter_ecpm_fangcha",
 		"inter_num_avg", "reward_num_avg", "inter_num_fangcha", "reward_num_fangcha",
 		"avg_ARPU", "avg_fufei_yiyuan", "avg_ARPU_fangcha", "avg_fufei_yiyuan_fangcha",
+		"avg_ARPU_total", "avg_ARPU_iap", "avg_ARRPU_iap",
+		"avg_ARPU_total_fangcha", "avg_ARPU_iap_fangcha", "avg_ARPPU_iap_fangcha",
+		"iap_id", "CVR", "iap_rev_ratio", "avg_PUR",
+		"CVR_fangcha", "iap_rev_ratio_fangcha", "avg_PUR_fangcha",
 	},
 }
