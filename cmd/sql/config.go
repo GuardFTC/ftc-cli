@@ -83,12 +83,11 @@ var tableColumnMap = map[string][]string{
 		"payed_total",
 	},
 	"ads_bi_ad_revenue_d_i": {
-		"game_id", "dt", "data_type", "platform", "ad_type", "country",
-		"ad_unit_id",
-		"imp", "rev", "dau",
-		"load_success", "start_load",
-		"display_start", "display", "display_finish",
-		"nextday_user", "today_user",
+		"game_id", "dt",
+		"data_type", "ad_type", "platform", "country", "media_source", "ad_unit_id",
+		"networkName", "rev",
+		"DEU", "max_sdk_num", "display_num",
+		"click_num", "start_num", "load_success_num", "display_finish_num", "rv_reward_num", "DAU",
 	},
 	"channel_material": {
 		"id", "day_time", "log_time", "date_time", "ts", "game_id",
