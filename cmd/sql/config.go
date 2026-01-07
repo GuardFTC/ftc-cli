@@ -87,7 +87,7 @@ var tableColumnMap = map[string][]string{
 		"data_type", "ad_type", "platform", "country", "media_source", "ad_unit_id",
 		"networkName", "rev",
 		"DEU", "max_sdk_num", "display_num",
-		"click_num", "start_num", "load_success_num", "display_finish_num", "rv_reward_num", "DAU",
+		"click_num", "start_num", "load_success_num", "display_finish_num", "rv_reward_num", "display_start_num", "DAU",
 	},
 	"channel_material": {
 		"id", "day_time", "log_time", "date_time", "ts", "game_id",
