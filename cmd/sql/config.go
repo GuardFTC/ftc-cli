@@ -233,4 +233,15 @@ var tableColumnMap = map[string][]string{
 		"chuizi_cost", "xiannvbang_cost", "dongjie_cost", "xipai_cost",
 		"ad_unlock_reward", "ad_claim_btn_time",
 	},
+	"dwd_btn_level_start_d_i": {
+		"id", "day_time", "date_time", "log_time", "device_id", "channel_id",
+		"country", "version_code", "game_id", "media_id", "language",
+		"cur_level", "cur_leveldata", "level_enter_dlg_source", "replay_num",
+		"is_golden_gift", "level_type", "extend",
+	},
+	"dwd_ab_test_d_i": {
+		"id", "day_time", "date_time", "log_time",
+		"device_id", "channel_id", "country", "version_code", "game_id",
+		"media_id", "language", "test_name", "group_ab",
+	},
 }
