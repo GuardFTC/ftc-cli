@@ -244,4 +244,11 @@ var tableColumnMap = map[string][]string{
 		"device_id", "channel_id", "country", "version_code", "game_id",
 		"media_id", "language", "test_name", "group_ab",
 	},
+	"ads_bi_all_active_d_i": {
+		"day_time", "data_type", "user_type", "platform", "country_code", "campaign", "media_source",
+		"users", "online_time", "level_num", "all_revenue", "pay_revenue",
+		"inter_num", "reward_num", "banner_num",
+		"inter_rev", "reward_rev", "banner_rev",
+		"rev_0", "rev_1", "rev_3", "rev_7",
+	},
 }
