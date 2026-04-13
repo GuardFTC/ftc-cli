@@ -249,4 +249,9 @@ var tableColumnMap = map[string][]string{
 		"inter_rev", "reward_rev", "banner_rev",
 		"rev_0", "rev_1", "rev_3", "rev_7",
 	},
+	"ads_bi_ad_ltinfo_d_i": {
+		"game_id", "data_type", "create_dt", "platform", "country", "media_source", "campaign", "is_include_org",
+		"living_days", "device_num",
+		"inter_num", "inter_rev", "reward_num", "reward_rev",
+	},
 }
