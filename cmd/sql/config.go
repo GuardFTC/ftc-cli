@@ -254,4 +254,15 @@ var tableColumnMap = map[string][]string{
 		"living_days", "device_num",
 		"inter_num", "inter_rev", "reward_num", "reward_rev",
 	},
+	"dws_bi_lost_reason_d_i": {
+		"device_id", "calculation_day", "living_days", "create_day", "campaign", "media_source", "platform", "country_code", "create_version_code",
+		"log_start", "log_fail", "log_inter", "log_reward", "log_end", "log_replay", "log_fuhuo",
+		"inter_position", "reward_position", "log_best", "lost_type", "lost_reason",
+	},
+	"dws_user_info_d_i": {
+		"device_id", "day_time", "country_code",
+		"af_day_time", "af_date_time", "platform", "media_source", "campaign",
+		"af_ad", "campaign_id", "create_day_time", "create_date_time", "channel_id", "create_version_code",
+		"inter_ecpm",
+	},
 }
