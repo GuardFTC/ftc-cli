@@ -17,7 +17,7 @@ var tableColumnMap = map[string][]string{
 	defaultTable: {
 		"game_id", "data_type", "dt", "platform", "country",
 		"media_source", "ad_material", "campaign", "campaign_id",
-		"is_include_org", "nu", "total_rev", "click", "cost", "impression",
+		"is_include_org", "is_include_iap", "nu", "total_rev", "click", "cost", "impression",
 		"rev0", "rev1", "rev2", "rev3", "rev4", "rev5", "rev6", "rev7", "rev8", "rev9",
 		"rev10", "rev11", "rev12", "rev13", "rev14", "rev15", "rev30", "rev60", "rev90",
 		"rev120", "rev150", "rev180", "rev210", "rev240", "rev270", "rev300", "rev330", "rev360",
