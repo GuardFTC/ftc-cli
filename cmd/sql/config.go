@@ -265,4 +265,9 @@ var tableColumnMap = map[string][]string{
 		"af_ad", "campaign_id", "create_day_time", "create_date_time", "channel_id", "create_version_code",
 		"inter_ecpm",
 	},
+	"ads_bi_pur_d_i": {
+		"game_id", "data_type", "day_time", "platform", "country", "media_source", "campaign", "create_version_code", "nu",
+		"pay_user_0", "pay_user_1", "pay_user_2", "pay_user_3", "pay_user_4", "pay_user_5", "pay_user_6", "pay_user_7",
+		"pay_alluser_0", "pay_alluser_1", "pay_alluser_2", "pay_alluser_3", "pay_alluser_4", "pay_alluser_5", "pay_alluser_6", "pay_alluser_7",
+	},
 }
