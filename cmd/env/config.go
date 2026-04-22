@@ -32,8 +32,8 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"-jar", "C:\\Users\\Administrator\\base\\sentinel\\sentinel-dashboard-1.8.8.jar",
 			},
 			"redis": {
-				"cmd",
-				"/C", `C:\Users\Administrator\base\redis\redis-server.exe`,
+				"docker",
+				"start", "redis-stack",
 			},
 		},
 	},
