@@ -12,7 +12,7 @@ import (
 
 // 定义根命令
 var rootCmd = &cobra.Command{
-	Use:     "ftc-cli",
+	Use:     "ftcli",
 	Short:   "the tool for ftc develop work",
 	Version: "1.0.0",
 }
