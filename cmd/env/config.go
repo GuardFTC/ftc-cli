@@ -36,6 +36,16 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"start", "redis-stack",
 			},
 		},
+		"ftcli": {
+			"redis": {
+				"docker",
+				"start", "redis-stack",
+			},
+			"chroma": {
+				"docker",
+				"start", "chroma-server",
+			},
+		},
 	},
 	mac: {
 		defaultProject: {
