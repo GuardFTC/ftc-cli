@@ -2,6 +2,7 @@
 package cmd
 
 import (
+	"go-ftc-console/cmd/ai"
 	"go-ftc-console/cmd/env"
 	_package "go-ftc-console/cmd/package"
 	"go-ftc-console/cmd/sql"
@@ -27,6 +28,7 @@ func Init() {
 	rootCmd.AddCommand(env.NewEnvCommand())
 	rootCmd.AddCommand(_package.NewPackageCommand())
 	rootCmd.AddCommand(sql.NewSqlCommand())
+	rootCmd.AddCommand(ai.NewAiCommand())
 
 	//3.执行根命令
 	if err := rootCmd.Execute(); err != nil {
