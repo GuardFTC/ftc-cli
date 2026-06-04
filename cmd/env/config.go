@@ -45,6 +45,10 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"docker",
 				"start", "chroma-server",
 			},
+			"ftcli-server": {
+				"java",
+				"-jar", "C:\\Users\\Administrator\\project\\java\\ftcli\\target\\ftcli-0.0.1-SNAPSHOT.jar",
+			},
 		},
 	},
 	mac: {
