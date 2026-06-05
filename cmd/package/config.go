@@ -28,6 +28,12 @@ var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			"output": {"explorer", "C:\\Users\\Administrator\\project\\java\\logging-mon\\output"},
 			"kill":   {"java", "logging-mon"},
 		},
+		"ftcli": {
+			"pom":    {"C:\\Users\\Administrator\\project\\java\\ftcli\\pom.xml"},
+			"maven":  {"C:\\Users\\Administrator\\maven\\apache-maven-3.9.9-bin\\apache-maven-3.9.9\\conf\\settings.xml"},
+			"output": {"explorer", "C:\\Users\\Administrator\\project\\java\\ftcli\\target"},
+			"kill":   {"java", "ftcli"},
+		},
 	},
 	mac: {
 		defaultProject: {
