@@ -2,4 +2,4 @@
 package ai
 
 // 默认服务地址
-var defaultBaseURL = "http://localhost:6666"
+var defaultBaseURL = "http://localhost:6680"
