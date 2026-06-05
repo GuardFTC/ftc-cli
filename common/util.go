@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"runtime"
 	"strconv"
 	"strings"
 
@@ -85,4 +86,24 @@ func KillProcess(nameContains string, cmdContains string) error {
 func IsNumeric(s string) bool {
 	_, err := strconv.ParseFloat(s, 64)
 	return err == nil
+}
+
+// OpenBrowser 用默认浏览器打开URL
+func OpenBrowser(url string) error {
+
+	//1.定义系统命令
+	var cmd *exec.Cmd
+
+	//2.根据不同系统选择不同命令
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("cmd", "/C", "start", url)
+	case "darwin":
+		cmd = exec.Command("open", url)
+	default:
+		cmd = exec.Command("xdg-open", url)
+	}
+
+	//3.执行命令
+	return cmd.Run()
 }

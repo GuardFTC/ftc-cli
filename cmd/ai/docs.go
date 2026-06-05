@@ -4,6 +4,7 @@ package ai
 import (
 	"encoding/json"
 	"fmt"
+	"go-ftc-console/common"
 	"os"
 	"text/tabwriter"
 )
@@ -98,4 +99,20 @@ func runUploadDoc() {
 			fmt.Printf("  ~ %s\n", f)
 		}
 	}
+}
+
+// runDocsWeb 打开文档管理页面
+func runDocsWeb() {
+
+	//1.定义URL
+	url := baseURL + "/docs.html"
+
+	//2.打开浏览器
+	if err := common.OpenBrowser(url); err != nil {
+		fmt.Printf("打开浏览器失败: %v\n", err)
+		return
+	}
+
+	//3.日志打印
+	fmt.Printf("已打开页面: %s\n", url)
 }

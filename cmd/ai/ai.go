@@ -13,6 +13,7 @@ var (
 	uploadDoc string
 	listTools bool
 	toolsWeb  bool
+	docsWeb   bool
 	baseURL   string
 )
 
@@ -26,6 +27,7 @@ func NewAiCommand() *cobra.Command {
 	aiCmd.Flags().StringVarP(&uploadDoc, "upload", "u", "", "上传文档(指定文件/目录路径)")
 	aiCmd.Flags().BoolVarP(&listTools, "tools", "t", false, "查看AI工具列表")
 	aiCmd.Flags().BoolVar(&toolsWeb, "tl", false, "打开AI工具管理页面")
+	aiCmd.Flags().BoolVar(&docsWeb, "fl", false, "打开AI文档管理页面")
 	aiCmd.Flags().StringVarP(&baseURL, "server", "s", defaultBaseURL, "后端服务地址")
 
 	//2.返回
@@ -44,10 +46,12 @@ var aiCmd = &cobra.Command{
 			runChat(true)
 		case webChat:
 			runChat(false)
-		case listDocs:
-			runListDocs()
 		case uploadDoc != "":
 			runUploadDoc()
+		case listDocs:
+			runListDocs()
+		case docsWeb:
+			runDocsWeb()
 		case listTools:
 			runListTools()
 		case toolsWeb:

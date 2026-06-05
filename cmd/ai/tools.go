@@ -4,9 +4,8 @@ package ai
 import (
 	"encoding/json"
 	"fmt"
+	"go-ftc-console/common"
 	"os"
-	"os/exec"
-	"runtime"
 	"text/tabwriter"
 )
 
@@ -55,26 +54,15 @@ func runListTools() {
 // runToolsWeb 打开工具管理页面
 func runToolsWeb() {
 
-	//1.拼接URL
+	//1.定义URL
 	url := baseURL + "/tools.html"
 
-	//2.根据系统打开浏览器
-	var cmd *exec.Cmd
-	switch runtime.GOOS {
-	case "windows":
-		cmd = exec.Command("cmd", "/C", "start", url)
-	case "darwin":
-		cmd = exec.Command("open", url)
-	default:
-		cmd = exec.Command("xdg-open", url)
-	}
-
-	//3.执行命令
-	if err := cmd.Run(); err != nil {
+	//2.打开浏览器
+	if err := common.OpenBrowser(url); err != nil {
 		fmt.Printf("打开浏览器失败: %v\n", err)
 		return
 	}
 
-	//4.打印提示
-	fmt.Printf("已打开工具管理页面: %s\n", url)
+	//3.日志打印
+	fmt.Printf("已打开页面: %s\n", url)
 }
