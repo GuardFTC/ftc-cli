@@ -25,6 +25,7 @@ func NewAiCommand() *cobra.Command {
 	aiCmd.Flags().BoolVarP(&webChat, "web", "w", false, "基于网络进行流式AI聊天")
 	aiCmd.Flags().BoolVarP(&listDocs, "docs", "f", false, "查看已上传文档列表")
 	aiCmd.Flags().StringVarP(&uploadDoc, "upload", "u", "", "上传文档(指定文件/目录路径)")
+	aiCmd.Flags().Lookup("upload").NoOptDefVal = "C:\\Users\\Administrator\\doc"
 	aiCmd.Flags().BoolVarP(&listTools, "tools", "t", false, "查看AI工具列表")
 	aiCmd.Flags().BoolVar(&toolsWeb, "tl", false, "打开AI工具管理页面")
 	aiCmd.Flags().BoolVar(&docsWeb, "fl", false, "打开AI文档管理页面")
