@@ -5,6 +5,7 @@ import (
 	"go-ftc-console/cmd/ai"
 	"go-ftc-console/cmd/build"
 	"go-ftc-console/cmd/env"
+	"go-ftc-console/cmd/open"
 	_package "go-ftc-console/cmd/package"
 	"go-ftc-console/cmd/sql"
 	"os"
@@ -31,6 +32,7 @@ func Init() {
 	rootCmd.AddCommand(sql.NewSqlCommand())
 	rootCmd.AddCommand(ai.NewAiCommand())
 	rootCmd.AddCommand(build.NewBuildCommand())
+	rootCmd.AddCommand(open.NewOpenCommand())
 
 	//3.执行根命令
 	if err := rootCmd.Execute(); err != nil {
