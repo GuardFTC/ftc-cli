@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 )
@@ -90,7 +91,7 @@ func findServiceLogFile(serviceName string) string {
 	return ""
 }
 
-// tailLog 滚动输出日志文件（类似 tail -f）
+// tailLog 滚动输出日志文件（类似 tail -f，先输出最后100行）
 func tailLog(logFile string) {
 
 	//1.打开日志文件
@@ -101,24 +102,27 @@ func tailLog(logFile string) {
 	}
 	defer file.Close()
 
-	//2.移动到文件末尾
-	file.Seek(0, io.SeekEnd)
-
-	//3.打印提示
+	//2.打印提示
 	fmt.Printf(">>> 正在滚动查看日志: %s (按 Ctrl+C 退出)\n", logFile)
 	fmt.Println("--------------------------------------------------------------------------------")
 
-	//4.监听退出信号
+	//3.先输出最后100行
+	printLastNLines(logFile, 100)
+
+	//4.移动到文件末尾，开始追踪新内容
+	file.Seek(0, io.SeekEnd)
+
+	//5.监听退出信号
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
-	//5.创建读取器
+	//6.创建读取器
 	reader := bufio.NewReader(file)
 
-	//6.循环读取新内容
+	//7.循环读取新内容
 	for {
 
-		//7.检查退出信号
+		//8.检查退出信号
 		select {
 		case <-sigChan:
 			fmt.Println("\n>>> 已退出日志查看")
@@ -126,16 +130,42 @@ func tailLog(logFile string) {
 		default:
 		}
 
-		//8.尝试读取一行
+		//9.尝试读取一行
 		line, err := reader.ReadString('\n')
 		if err != nil {
 
-			//9.如果是EOF，等待100ms后继续
+			//10.如果是EOF，等待100ms后继续
 			time.Sleep(100 * time.Millisecond)
 			continue
 		}
 
-		//10.输出日志
+		//11.输出日志
 		fmt.Print(line)
+	}
+}
+
+// printLastNLines 打印文件最后N行
+func printLastNLines(filePath string, n int) {
+
+	//1.读取文件
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return
+	}
+
+	//2.按行分割
+	lines := strings.Split(string(data), "\n")
+
+	//3.计算起始行
+	start := len(lines) - n
+	if start < 0 {
+		start = 0
+	}
+
+	//4.输出
+	for _, line := range lines[start:] {
+		if line != "" {
+			fmt.Println(line)
+		}
 	}
 }
