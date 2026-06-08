@@ -9,9 +9,7 @@ import (
 var (
 	localChat bool
 	webChat   bool
-	listDocs  bool
 	uploadDoc string
-	listTools bool
 	toolsWeb  bool
 	docsWeb   bool
 	baseURL   string
@@ -23,12 +21,10 @@ func NewAiCommand() *cobra.Command {
 	//1.设置Flags
 	aiCmd.Flags().BoolVarP(&localChat, "local", "l", false, "基于本地文库进行流式AI聊天")
 	aiCmd.Flags().BoolVarP(&webChat, "web", "w", false, "基于网络进行流式AI聊天")
-	aiCmd.Flags().BoolVarP(&listDocs, "docs", "f", false, "查看已上传文档列表")
 	aiCmd.Flags().StringVarP(&uploadDoc, "upload", "u", "", "上传文档(指定文件/目录路径)")
 	aiCmd.Flags().Lookup("upload").NoOptDefVal = "C:\\Users\\Administrator\\doc"
-	aiCmd.Flags().BoolVarP(&listTools, "tools", "t", false, "查看AI工具列表")
-	aiCmd.Flags().BoolVar(&toolsWeb, "tl", false, "打开AI工具管理页面")
-	aiCmd.Flags().BoolVar(&docsWeb, "fl", false, "打开AI文档管理页面")
+	aiCmd.Flags().BoolVarP(&toolsWeb, "tools", "t", false, "打开AI工具管理页面")
+	aiCmd.Flags().BoolVarP(&docsWeb, "docs", "f", false, "打开AI文档管理页面")
 	aiCmd.Flags().StringVarP(&baseURL, "server", "s", defaultBaseURL, "后端服务地址")
 
 	//2.返回
@@ -49,12 +45,8 @@ var aiCmd = &cobra.Command{
 			runChat(false)
 		case uploadDoc != "":
 			runUploadDoc()
-		case listDocs:
-			runListDocs()
 		case docsWeb:
 			runDocsWeb()
-		case listTools:
-			runListTools()
 		case toolsWeb:
 			runToolsWeb()
 		default:

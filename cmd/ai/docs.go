@@ -5,18 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"go-ftc-console/common"
-	"os"
-	"text/tabwriter"
 )
-
-// EmbeddingRecord 文档记录
-type EmbeddingRecord struct {
-	Id        int64  `json:"id"`
-	FileName  string `json:"fileName"`
-	FilePath  string `json:"filePath"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-}
 
 // EmbeddingUploadPayload 文档上传请求体
 type EmbeddingUploadPayload struct {
@@ -27,42 +16,6 @@ type EmbeddingUploadPayload struct {
 type EmbeddingUploadResult struct {
 	AddFiles    []string `json:"addFiles"`
 	UpdateFiles []string `json:"updateFiles"`
-}
-
-// runListDocs 查看已上传文档
-func runListDocs() {
-
-	//1.发送请求
-	result, err := doGet(baseURL + "/api/rest/v1/ai/embedding/docs")
-	if err != nil {
-		fmt.Printf("查询文档失败: %v\n", err)
-		return
-	}
-
-	//2.解析文档列表
-	var docs []EmbeddingRecord
-	if err := json.Unmarshal(result.Data, &docs); err != nil {
-		fmt.Printf("解析文档列表失败: %v\n", err)
-		return
-	}
-
-	//3.判空
-	if len(docs) == 0 {
-		fmt.Println("暂无已上传文档")
-		return
-	}
-
-	//4.打印文档表格
-	fmt.Println("--------------------------------------------------------------------------------")
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
-	fmt.Fprintln(w, "| ID\t| 文件名\t| 文件路径\t| 创建时间\t| 更新时间\t|")
-	fmt.Fprintln(w, "--------------------------------------------------------------------------------")
-	for _, doc := range docs {
-		fmt.Fprintf(w, "| %d\t| %s\t| %s\t| %s\t| %s\t|\n",
-			doc.Id, doc.FileName, doc.FilePath, doc.CreatedAt, doc.UpdatedAt)
-	}
-	fmt.Fprintln(w, "--------------------------------------------------------------------------------")
-	w.Flush()
 }
 
 // runUploadDoc 上传文档
