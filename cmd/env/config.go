@@ -47,6 +47,9 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			},
 			"ftcli-server": {
 				"java",
+				"-Dfile.encoding=UTF-8",
+				"-Dstdout.encoding=UTF-8",
+				"-Dstderr.encoding=UTF-8",
 				"-jar", "C:\\Users\\Administrator\\project\\java\\ftcli\\target\\ftcli-0.0.1-SNAPSHOT.jar",
 			},
 		},

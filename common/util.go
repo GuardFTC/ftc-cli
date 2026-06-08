@@ -14,17 +14,27 @@ import (
 	"github.com/shirou/gopsutil/v3/process"
 )
 
+// ensureUTF8Console 确保Windows控制台使用UTF-8代码页，解决中文乱码问题
+func ensureUTF8Console() {
+	if runtime.GOOS == "windows" {
+		exec.Command("cmd", "/C", "chcp", "65001").Run()
+	}
+}
+
 // RunCommand 封装执行命令的函数，传入命令名和参数，返回错误
 func RunCommand(command string, args ...string) error {
 
-	//1.创建执行命令对象
+	//1.确保控制台使用UTF-8代码页
+	ensureUTF8Console()
+
+	//2.创建执行命令对象
 	cmd := exec.Command(command, args...)
 
-	//2.标准输出、错误输出重定向到控制台，实时打印
+	//3.标准输出、错误输出重定向到控制台，实时打印
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
-	//3.运行命令，等待完成
+	//4.运行命令，等待完成
 	return cmd.Run()
 }
 
