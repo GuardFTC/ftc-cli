@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"strings"
-	"sync"
 	"text/tabwriter"
 
 	"go-ftc-console/common"
@@ -93,55 +92,41 @@ func runEnvCommand() {
 		log.Fatalf("不支持项目: %v\n", envProject)
 	}
 
-	//3.创建阻塞器，类似于Java里面的CountDownLatch
-	var wg sync.WaitGroup
-	wg.Add(len(systemProject))
-
-	//4.依次执行命令
+	//3.依次执行命令
 	for property, propertyValues := range systemProject {
 
-		//5.创建协程执行命令
-		go func(property string, propertyValues []string) {
+		//4.判断是否为后台启动模式
+		if propertyValues[0] == "background" {
 
-			//6.命令执行完成后释放阻塞器
-			defer wg.Done()
+			//5.解析配置：background, 日志路径, 检测端口, kill进程名, kill关键字, 实际命令...
+			logFile := propertyValues[1]
+			checkPort := propertyValues[2]
+			killName := propertyValues[3]
+			killKeyword := propertyValues[4]
+			actualValues := propertyValues[5:]
 
-			//7.判断是否为后台启动模式
-			if propertyValues[0] == "background" {
+			//6.先kill旧进程，确保幂等
+			fmt.Printf(">>> 停止已运行的%v进程...\n", property)
+			common.KillProcess(killName, killKeyword)
 
-				//8.解析配置：background, 日志路径, 检测端口, kill进程名, kill关键字, 实际命令...
-				logFile := propertyValues[1]
-				checkPort := propertyValues[2]
-				killName := propertyValues[3]
-				killKeyword := propertyValues[4]
-				actualValues := propertyValues[5:]
-
-				//9.先kill旧进程，确保幂等
-				fmt.Printf(">>> 停止已运行的%v进程...\n", property)
-				common.KillProcess(killName, killKeyword)
-
-				//10.后台启动
-				fmt.Printf(">>> 后台启动%v: %v\n", property, actualValues)
-				if err := common.RunCommandBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
-					fmt.Printf("后台启动失败: %v\n", err)
-					return
-				}
-			} else {
-
-				//11.前台执行命令
-				fmt.Printf(">>> 执行启动%v命令: %v\n", property, propertyValues)
-				if err := common.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
-					fmt.Printf("命令执行失败: %v\n", err)
-					return
-				}
-				fmt.Printf("启动%v命令执行成功\n\n", property)
+			//7.后台启动
+			fmt.Printf(">>> 后台启动%v: %v\n", property, actualValues)
+			if err := common.RunCommandBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
+				fmt.Printf("后台启动失败: %v\n", err)
+				continue
 			}
-		}(property, propertyValues)
+		} else {
+
+			//8.前台执行命令
+			fmt.Printf(">>> 执行启动%v命令: %v\n", property, propertyValues)
+			if err := common.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
+				fmt.Printf("命令执行失败: %v\n", err)
+				continue
+			}
+			fmt.Printf("启动%v命令执行成功\n\n", property)
+		}
 	}
 
-	//8.阻塞，等待所有协程执行完成
-	wg.Wait()
-
-	//9.所有命令完成的提示
+	//4.所有命令完成的提示
 	fmt.Println("所有命令执行完成！")
 }

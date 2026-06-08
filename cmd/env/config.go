@@ -18,11 +18,19 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	windows: {
 		defaultProject: {
 			"nacos": {
+				"background",
+				"C:\\Users\\Administrator\\project\\java\\logs\\nacos.log",
+				"8848",
+				"java", "nacos",
 				"cmd",
 				"/C", "C:\\Users\\Administrator\\base\\nacos\\bin\\startup.cmd",
 				"-m", "standalone",
 			},
 			"sentinel": {
+				"background",
+				"C:\\Users\\Administrator\\project\\java\\logs\\sentinel.log",
+				"8849",
+				"java", "sentinel",
 				"java",
 				"-Dserver.port=8849",
 				"-Dcsp.sentinel.dashboard.server=0.0.0.0:8849",
