@@ -15,7 +15,7 @@ import (
 func runBgLog(serviceName string) {
 
 	//1.如果未指定服务名，列出可选服务
-	if serviceName == "" {
+	if serviceName == "" || serviceName == "list" {
 		printAvailableServices()
 		return
 	}

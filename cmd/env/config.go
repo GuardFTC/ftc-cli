@@ -53,7 +53,7 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"docker",
 				"start", "chroma-server",
 			},
-			"ftcli-server": {
+			"ftcli": {
 				"background",
 				"C:\\Users\\Administrator\\project\\java\\logs\\ftcli-server.log",
 				"6680",

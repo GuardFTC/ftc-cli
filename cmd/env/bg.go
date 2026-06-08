@@ -24,7 +24,7 @@ func runListBgServices() {
 
 	//3.打印表头
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
-	fmt.Fprintln(w, "| 项目\t             | 服务名\t      | 端口\t| 状态\t  | 日志路径\t")
+	fmt.Fprintln(w, "| 项目\t             | 服务名\t  | 端口\t| 状态\t  | 日志路径\t")
 	fmt.Fprintln(w, "--------------------------------------------------------------------------------")
 
 	//4.遍历所有项目

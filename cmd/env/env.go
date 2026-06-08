@@ -28,8 +28,7 @@ func NewEnvCommand() *cobra.Command {
 	envCmd.Flags().StringVarP(&envProject, "project", "p", defaultProject, "项目名称")
 	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
 	envCmd.Flags().BoolVarP(&envListBg, "background", "b", false, "查看所有后台运行进程")
-	envCmd.Flags().StringVar(&envBgLog, "bl", "", "滚动查看后台服务日志(指定服务名)")
-	envCmd.Flags().Lookup("bl").NoOptDefVal = " "
+	envCmd.Flags().StringVar(&envBgLog, "bl", "", "滚动查看后台服务日志(指定服务名,用-b查看可选服务)")
 
 	//2.返回
 	return envCmd
@@ -48,8 +47,7 @@ var envCmd = &cobra.Command{
 		case envListBg:
 			runListBgServices()
 		case envBgLog != "":
-			serviceName := strings.TrimSpace(envBgLog)
-			runBgLog(serviceName)
+			runBgLog(envBgLog)
 		default:
 			runEnvCommand()
 		}
