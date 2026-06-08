@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"syscall"
 	"time"
 
 	"github.com/shirou/gopsutil/v3/process"
@@ -62,9 +61,7 @@ func RunCommandBackground(logFile string, checkPort string, command string, args
 	cmd := exec.Command(command, args...)
 
 	//3.设置进程属性，使子进程完全独立于父进程（Windows下创建新进程组）
-	cmd.SysProcAttr = &syscall.SysProcAttr{
-		CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP,
-	}
+	setDetachAttrs(cmd)
 
 	//4.如果指定了日志文件，则将stdout和stderr重定向到文件
 	if logFile != "" {
@@ -147,9 +144,7 @@ func RunCommandBackgroundNoCheck(command string, args ...string) error {
 	cmd := exec.Command(command, args...)
 
 	//2.设置进程属性，使子进程完全独立于父进程
-	cmd.SysProcAttr = &syscall.SysProcAttr{
-		CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP,
-	}
+	setDetachAttrs(cmd)
 
 	//3.不绑定标准输入输出
 	cmd.Stdout = nil
