@@ -28,6 +28,8 @@ var buildCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 			"java-kill":  {"java", "ftcli"},
 			"java-pom":   {"C:\\Users\\Administrator\\project\\java\\ftcli\\pom.xml"},
 			"java-maven": {"C:\\Users\\Administrator\\maven\\apache-maven-3.9.9-bin\\apache-maven-3.9.9\\conf\\settings.xml"},
+			"java-log":   {"C:\\Users\\Administrator\\project\\java\\logs\\ftcli-server.log"},
+			"java-port":  {"6680"},
 			"java-start": {
 				"java",
 				"-Dfile.encoding=UTF-8",

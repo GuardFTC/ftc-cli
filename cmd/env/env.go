@@ -106,13 +106,36 @@ func runEnvCommand() {
 			//6.命令执行完成后释放阻塞器
 			defer wg.Done()
 
-			//7.执行命令
-			fmt.Printf(">>> 执行启动%v命令: %v\n", property, propertyValues)
-			if err := common.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
-				fmt.Printf("命令执行失败: %v\n", err)
-				return
+			//7.判断是否为后台启动模式
+			if propertyValues[0] == "background" {
+
+				//8.解析配置：background, 日志路径, 检测端口, kill进程名, kill关键字, 实际命令...
+				logFile := propertyValues[1]
+				checkPort := propertyValues[2]
+				killName := propertyValues[3]
+				killKeyword := propertyValues[4]
+				actualValues := propertyValues[5:]
+
+				//9.先kill旧进程，确保幂等
+				fmt.Printf(">>> 停止已运行的%v进程...\n", property)
+				common.KillProcess(killName, killKeyword)
+
+				//10.后台启动
+				fmt.Printf(">>> 后台启动%v: %v\n", property, actualValues)
+				if err := common.StartBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
+					fmt.Printf("后台启动失败: %v\n", err)
+					return
+				}
+			} else {
+
+				//11.前台执行命令
+				fmt.Printf(">>> 执行启动%v命令: %v\n", property, propertyValues)
+				if err := common.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
+					fmt.Printf("命令执行失败: %v\n", err)
+					return
+				}
+				fmt.Printf("启动%v命令执行成功\n\n", property)
 			}
-			fmt.Printf("启动%v命令执行成功\n\n", property)
 		}(property, propertyValues)
 	}
 

@@ -46,6 +46,10 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"start", "chroma-server",
 			},
 			"ftcli-server": {
+				"background",
+				"C:\\Users\\Administrator\\project\\java\\logs\\ftcli-server.log",
+				"6680",
+				"java", "ftcli",
 				"java",
 				"-Dfile.encoding=UTF-8",
 				"-Dstdout.encoding=UTF-8",
