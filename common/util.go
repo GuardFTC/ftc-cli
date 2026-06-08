@@ -34,6 +34,37 @@ func GetProjectItems(project map[string][]string, key string) []string {
 	return projectItems
 }
 
+// IsProcessRunning 判断进程是否正在运行
+func IsProcessRunning(nameContains string, cmdContains string) bool {
+
+	//1.参数判定
+	if nameContains == "" && cmdContains == "" {
+		return false
+	}
+
+	//2.获取所有进程
+	processes, err := process.Processes()
+	if err != nil {
+		return false
+	}
+
+	//3.遍历所有进程
+	for _, p := range processes {
+
+		//4.获取进程名称，进程命令行
+		name, _ := p.Name()
+		cmdline, _ := p.Cmdline()
+
+		//5.如果进程名包含关键字，并且命令行包含关键字
+		if strings.Contains(strings.ToLower(name), nameContains) && strings.Contains(cmdline, cmdContains) {
+			return true
+		}
+	}
+
+	//6.默认返回
+	return false
+}
+
 // KillProcess 杀死进程
 func KillProcess(nameContains string, cmdContains string) error {
 

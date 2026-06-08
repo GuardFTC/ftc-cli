@@ -17,6 +17,8 @@ import (
 var (
 	envProject     string
 	envListProject bool
+	envListBg      bool
+	envBgLog       string
 )
 
 // NewEnvCommand 创建env命令
@@ -25,6 +27,9 @@ func NewEnvCommand() *cobra.Command {
 	//1.设置Flags
 	envCmd.Flags().StringVarP(&envProject, "project", "p", defaultProject, "项目名称")
 	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
+	envCmd.Flags().BoolVarP(&envListBg, "background", "b", false, "查看所有后台运行进程")
+	envCmd.Flags().StringVar(&envBgLog, "bl", "", "滚动查看后台服务日志(指定服务名)")
+	envCmd.Flags().Lookup("bl").NoOptDefVal = " "
 
 	//2.返回
 	return envCmd
@@ -36,11 +41,16 @@ var envCmd = &cobra.Command{
 	Short: "run project env",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		//1.如果打印项目列表，则打印并返回，否则执行运行环境命令
-		if envListProject {
+		//1.根据flag执行对应操作
+		switch {
+		case envListProject:
 			consoleEnvProjectInfos()
-			return
-		} else {
+		case envListBg:
+			runListBgServices()
+		case envBgLog != "":
+			serviceName := strings.TrimSpace(envBgLog)
+			runBgLog(serviceName)
+		default:
 			runEnvCommand()
 		}
 	},
