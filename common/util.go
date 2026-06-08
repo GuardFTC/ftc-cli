@@ -98,6 +98,55 @@ func IsNumeric(s string) bool {
 	return err == nil
 }
 
+// RunCommandInDir 在指定目录下执行命令，传入工作目录、命令名和参数，返回错误
+func RunCommandInDir(dir string, command string, args ...string) error {
+
+	//1.确保控制台使用UTF-8代码页
+	ensureUTF8Console()
+
+	//2.创建执行命令对象
+	cmd := exec.Command(command, args...)
+
+	//3.设置工作目录
+	cmd.Dir = dir
+
+	//4.标准输出、错误输出重定向到控制台，实时打印
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	//5.运行命令，等待完成
+	return cmd.Run()
+}
+
+// StartBackground 后台启动进程，不等待进程结束，返回错误
+func StartBackground(command string, args ...string) error {
+
+	//1.确保控制台使用UTF-8代码页
+	ensureUTF8Console()
+
+	//2.创建执行命令对象
+	cmd := exec.Command(command, args...)
+
+	//3.分离子进程，不绑定父进程的标准输入输出
+	cmd.Stdout = nil
+	cmd.Stderr = nil
+	cmd.Stdin = nil
+
+	//4.启动进程，不等待结束
+	if err := cmd.Start(); err != nil {
+		return err
+	}
+
+	//5.释放进程资源，防止僵尸进程
+	go cmd.Wait()
+
+	//6.打印进程PID
+	fmt.Printf(">>> 服务已后台启动，PID=%d\n", cmd.Process.Pid)
+
+	//7.默认返回
+	return nil
+}
+
 // OpenBrowser 用默认浏览器打开URL
 func OpenBrowser(url string) error {
 
