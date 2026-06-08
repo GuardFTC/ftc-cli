@@ -122,7 +122,7 @@ func runEnvCommand() {
 
 				//10.后台启动
 				fmt.Printf(">>> 后台启动%v: %v\n", property, actualValues)
-				if err := common.StartBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
+				if err := common.RunCommandBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
 					fmt.Printf("后台启动失败: %v\n", err)
 					return
 				}

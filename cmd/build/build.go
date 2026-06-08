@@ -149,7 +149,7 @@ func buildJava(projectProperties map[string][]string) {
 	logFile := projectProperties["java-log"][0]
 	checkPort := projectProperties["java-port"][0]
 	startItems := projectProperties["java-start"]
-	if err := common.StartBackground(logFile, checkPort, startItems[0], startItems[1:]...); err != nil {
+	if err := common.RunCommandBackground(logFile, checkPort, startItems[0], startItems[1:]...); err != nil {
 		fmt.Printf("Java服务启动失败: %v\n", err)
 		return
 	}
@@ -253,7 +253,7 @@ func buildGoWindows(source string, output string) {
 
 	//5.后台启动bat脚本（不需要检测存活）
 	fmt.Printf(">>> [Go] 延迟替换脚本已生成，当前进程退出后将自动替换 %s\n", targetPath)
-	if err := common.StartBackgroundNoCheck("cmd", "/C", batPath); err != nil {
+	if err := common.RunCommandBackgroundNoCheck("cmd", "/C", batPath); err != nil {
 		log.Fatalf("启动替换脚本失败: %v\n", err)
 	}
 }
