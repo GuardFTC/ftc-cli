@@ -6,7 +6,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"os/exec"
 	"os/signal"
+	"runtime"
 	"strings"
 	"syscall"
 )
@@ -86,6 +88,16 @@ func runChat(isLocal bool) {
 			continue
 		}
 
+		//12.清屏命令
+		if input == "clear" {
+			clearScreen()
+			fmt.Println("===================================================================")
+			fmt.Printf(">> 进入 %s 聊天模式 (输入 'exit' 或 按 Ctrl+C 退出) <<\n", modeName)
+			fmt.Println("===================================================================")
+			fmt.Println()
+			continue
+		}
+
 		//12.构建请求
 		payload := ChatPayload{
 			IsLocal:     isLocal,
@@ -126,4 +138,22 @@ func getChatId() (string, error) {
 
 	//3.返回
 	return chatId, nil
+}
+
+// clearScreen 清屏
+func clearScreen() {
+
+	//1.根据系统选择不同命令
+	var cmd *exec.Cmd
+	if runtime.GOOS == "windows" {
+		cmd = exec.Command("cmd", "/C", "cls")
+	} else {
+		cmd = exec.Command("clear")
+	}
+
+	//2.绑定标准输出
+	cmd.Stdout = os.Stdout
+
+	//3.执行
+	cmd.Run()
 }
