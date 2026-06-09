@@ -19,6 +19,7 @@ var (
 	envListProject bool
 	envListBg      bool
 	envBgLog       string
+	envBgKill      string
 )
 
 // NewEnvCommand 创建env命令
@@ -29,6 +30,7 @@ func NewEnvCommand() *cobra.Command {
 	envCmd.Flags().BoolVarP(&envListProject, "list project", "l", false, "输出内置项目信息")
 	envCmd.Flags().BoolVarP(&envListBg, "background", "b", false, "查看所有后台运行进程")
 	envCmd.Flags().StringVar(&envBgLog, "bl", "", "滚动查看后台服务日志(指定服务名,用-b查看可选服务)")
+	envCmd.Flags().StringVar(&envBgKill, "bk", "", "停止后台服务(指定服务名,用-b查看可选服务)")
 
 	//2.返回
 	return envCmd
@@ -48,6 +50,8 @@ var envCmd = &cobra.Command{
 			runListBgServices()
 		case envBgLog != "":
 			runBgLog(envBgLog)
+		case envBgKill != "":
+			runBgKill(envBgKill)
 		default:
 			runEnvCommand()
 		}
