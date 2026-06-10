@@ -100,6 +100,11 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 			Args:    []string{},
 			Always:  true,
 		},
+		"virtual": {
+			Command: "C:\\Program Files\\Oracle\\VirtualBox\\VirtualBox.exe",
+			Args:    []string{},
+			Always:  false,
+		},
 	},
 	mac: {},
 }
