@@ -15,9 +15,7 @@ import (
 
 // flag变量
 var (
-	openList    bool
-	openProgram string
-	openAll     bool
+	openList bool
 )
 
 // NewOpenCommand 创建open命令
@@ -25,8 +23,6 @@ func NewOpenCommand() *cobra.Command {
 
 	//1.设置Flags
 	openCmd.Flags().BoolVarP(&openList, "list", "l", false, "输出所有支持的软件")
-	openCmd.Flags().StringVarP(&openProgram, "program", "p", "", "指定打开软件(多个用逗号分隔)")
-	openCmd.Flags().BoolVarP(&openAll, "all", "a", false, "打开全部always为true的软件")
 
 	//2.返回
 	return openCmd
@@ -42,8 +38,8 @@ var openCmd = &cobra.Command{
 		switch {
 		case openList:
 			runListApps()
-		case openProgram != "":
-			runOpenByName(openProgram)
+		case len(args) > 0:
+			runOpenByName(strings.Join(args, ","))
 		default:
 			runOpenAlways()
 		}
