@@ -45,7 +45,7 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 			Args:    []string{},
 			Always:  true,
 		},
-		"wechat_wake": {
+		"we": {
 			Command: "cmd",
 			Args:    []string{"/c", "start", "weixin://"},
 			Always:  false,
@@ -102,6 +102,11 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 		},
 		"virtual": {
 			Command: "C:\\Program Files\\Oracle\\VirtualBox\\VirtualBox.exe",
+			Args:    []string{},
+			Always:  false,
+		},
+		"RDM": {
+			Command: "C:\\Program Files\\Tiny Craft\\Tiny RDM\\tinyrdm.exe",
 			Args:    []string{},
 			Always:  false,
 		},
