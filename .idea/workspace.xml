@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AIAssistantCustomInstructionsStorage">
+    <option name="instructions">
+      <map>
+        <entry key="AIAssistant.VCS.GenerateCommitMessage">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.VCS.GenerateCommitMessage" />
+              <option name="content" value="请根据以下规范生成 Git commit message，使用中文，极简表达：&#10;&#10;格式：&#10;&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;&#10;[正文]（可选）&#10;[Footer]（可选）&#10;&#10;type 选项（严格匹配，不可自创或混用）：&#10;feat: 新增业务功能&#10;fix: 修复缺陷&#10;docs: 文档/注释更新&#10;style: 代码格式调整（不影响运行逻辑）&#10;refactor: 代码重构（非功能新增/修复）&#10;perf: 性能优化&#10;test: 测试代码（含新增、修改、修复单元测试/集成测试）&#10;build: 构建系统/依赖管理变更&#10;ci: CI/CD 流程/配置变更&#10;chore: 其他杂项（工具链、脚本、配置等）&#10;&#10;核心规则：&#10;1. 类型优先级：凡涉及测试文件/目录的变更，type 必须为 test。严禁将“补充/修改测试”归类为 feat。&#10;2. scope 提取：优先使用实际业务模块或文件夹名。测试变更的 scope 应为对应被测模块名（如 user、auth、payment 等）。**scope 必须精简明确，禁止堆砌多个文件名或类名，若涉及模块过多或无法明确，则直接省略括号。**&#10;3. subject 要求：一句话精准描述改动，中文，无废话，不超过 50 字符。&#10;4. 正文/Footer：非必要不写。仅当包含破坏性更新(BREAKING CHANGE)或需补充上下文时添加。&#10;5. 格式严格：type 与 scope 间无空格，冒号后紧跟一个空格。仅输出 commit message 本身，禁止任何解释或前后缀。&#10;6. 多变更合并规则（核心）：当一次提交包含多种类型的修改（如同时修改了业务代码、测试代码和依赖）时，禁止输出多条独立的 commit message。必须将其合并为【单条】commit message。&#10;   - 合并时的 type 判定优先级：feat &gt; fix &gt; refactor &gt; perf &gt; test &gt; build &gt; ci &gt; chore &gt; docs &gt; style（例如：同时包含 feat 和 test/build 变更，type 必须定为 feat）。&#10;   - 合并时的 subject 要求：在 50 字符内提炼核心改动，可使用逗号或顿号连接。&#10;   - 合并时的正文要求：必须使用正文（Body）部分的列表，清晰列出各个模块的具体改动。&#10;&#10;示例：&#10;✅ test(user): 补充登录边界校验用例&#10;✅ fix(auth): 修复 Token 过期未刷新问题&#10;✅ feat(api): 新增商品列表分页接口&#10;❌ feat(test): 补充用户登录测试（错误：测试变更必须用 test 类型）&#10;&#10;复合场景示例（多文件/多类型一次性提交）：&#10;✅ 正确示范：&#10;feat(embedding): 引入智谱向量模型支持及测试&#10;- 新增 EmbeddingModelConfiguration 配置类&#10;- 引入 langchain4j 智谱AI依赖&#10;- 添加 ZhiPuEmbeddingModelTest 测试用例&#10;&#10;❌ 错误示范 1：&#10;feat(config): 添加向量模型配置类&#10;test(embedding): 添加智谱嵌入模型测试用例&#10;build(pom.xml): 添加langchain4j智谱AI依赖&#10;（错误原因：严禁单次提交输出多段独立的 commit message）&#10;&#10;❌ 错误示范 2：&#10;feat(AIChatService, AIChatController, AiAssistantConfig, WebAiService, LocalAiService): 新增流式聊天接口及实现&#10;- 在 `AiAssistantConfig` 中新增 `StreamingChatModel` 配置&#10;- 在 `WebAiService` 和 `LocalAiService` 中新增 `chatStream` 方法&#10;- 在 `AIChatServiceImpl` 中实现 `chatStream` 逻辑&#10;- 在 `AIChatController` 中新增 `/chat/stream` 接口&#10;（错误原因：scope 声明过于冗长且不明确，禁止将多个类名/文件名堆砌在 scope 中，此处应提炼为通用业务模块如 `feat(chat): ...` 或直接省略 scope 括号）&#10;&#10;请严格按上述规则输出。" />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="51d071dd-8c97-4427-86e9-1dd5b34be4ea" name="更改" comment="refactor(open): 更新微信启动配置并新增RDM配置&#10;- 将 `wechat_wake` 配置项重命名为 `we`&#10;- 在 `config.go` 中新增 `RDM` 配置项" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="29" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/base/go" />
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000000001002036" />
+      <entry key="S60" value="1.0000395076939552" />
+      <entry key="M2" value="1.0258944237769407" />
+      <entry key="M5" value="2.3006097269952277" />
+      <entry key="M10" value="5.828949551931942" />
+      <entry key="M15" value="8.484100642850482" />
+      <entry key="M30" value="12.669476748001443" />
+      <entry key="H1" value="16.623641010079822" />
+      <entry key="H2" value="22.597937941006677" />
+      <entry key="H4" value="30.607793122592234" />
+      <entry key="D1" value="49.419899137684375" />
+      <entry key="W1" value="56.56606356424474" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="2.4356037961297756E-163" />
+      <entry key="S5" value="9.008296183756087E-66" />
+      <entry key="S10" value="3.0013823787974914E-33" />
+      <entry key="S30" value="1.442471062426518E-11" />
+      <entry key="S60" value="3.79798770722934E-6" />
+      <entry key="M2" value="0.0019488426584076356" />
+      <entry key="M5" value="0.08239686932274604" />
+      <entry key="M10" value="0.2870485983663436" />
+      <entry key="M15" value="0.4351616968123037" />
+      <entry key="M30" value="0.6642695316557538" />
+      <entry key="H1" value="0.9258774636419059" />
+      <entry key="H2" value="1.5475728198370353" />
+      <entry key="H4" value="2.573286543304112" />
+      <entry key="D1" value="4.985148833255469" />
+      <entry key="W1" value="5.833454405418948" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9012504626108302" />
+      <entry key="MS500" value="0.9794202975869268" />
+      <entry key="S2" value="0.9948148855014217" />
+      <entry key="S5" value="0.9979227189990506" />
+      <entry key="S10" value="0.998960819551523" />
+      <entry key="S30" value="0.999653486572521" />
+      <entry key="S60" value="0.9998697877808356" />
+      <entry key="M2" value="1.0276823616657107" />
+      <entry key="M5" value="2.381524059590087" />
+      <entry key="M10" value="6.113304737447473" />
+      <entry key="M15" value="8.91648775978634" />
+      <entry key="M30" value="13.33159601488023" />
+      <entry key="H1" value="17.548145447476124" />
+      <entry key="H2" value="24.144662411806863" />
+      <entry key="H4" value="33.18055764688267" />
+      <entry key="D1" value="54.40492720595603" />
+      <entry key="W1" value="62.39949909765197" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2zioZdKGBJiBpHAm4trbVS5J6RY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go 构建.go build go-ftc-console.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboarding&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.analysis.ui.options.defaults&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrator/project/go/src/go-ftc-console&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project\go\src\go-ftc-console" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\project\go\src\go-ftc-console\cmd\package" />
+      <recent name="C:\Users\Administrator\project\go\src\go-ftc-console\cmd\env" />
+      <recent name="D:\project\go\src\go-ftc-console\common" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build go-ftc-console" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+      <module name="go-ftc-console" />
+      <working_directory value="$PROJECT_DIR$" />
+      <parameters value="ai -u C:\Users\Administrator\Desktop\favorites_2026_6_10.html" />
+      <kind value="PACKAGE" />
+      <package value="go-ftc-console" />
+      <directory value="$PROJECT_DIR$" />
+      <auto_managed_config_id value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-72a9cf600ed8-3dd3895e5e08-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-261.24374.154" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-GO-261.24374.154" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="51d071dd-8c97-4427-86e9-1dd5b34be4ea" name="更改" comment="" />
+      <created>1746696014588</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746696014588</updated>
+      <workItem from="1746696015645" duration="891000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(config): 添加 ftcli-server 命令配置&#10;&#10;- 在 `config.go` 中新增 `ftcli-server` 命令配置&#10;- 配置 Java 启动参数以运行 ftcli 服务器" />
+    <MESSAGE value="fix(config): 更新默认服务地址&#10;&#10;- 将 `defaultBaseURL` 从 `http://localhost:6666` 更新为 `http://localhost:6680`" />
+    <MESSAGE value="feat(ai): 新增AI工具管理页面打开功能&#10;- 在 `ai.go` 中新增 `toolsWeb` 命令标志&#10;- 在 `tools.go` 中实现 `runToolsWeb` 函数以根据系统打开浏览器并访问工具管理页面" />
+    <MESSAGE value="feat(config): 添加 ftcli 命令配置&#10;&#10;- 在 `config.go` 中新增 `ftcli` 命令配置&#10;- 配置 Java 启动参数以运行 ftcli 项目" />
+    <MESSAGE value="feat(ai): 新增文档管理页面打开功能及浏览器工具函数&#10;- 在 `ai.go` 中新增 `docsWeb` 命令标志&#10;- 在 `docs.go` 中实现 `runDocsWeb` 函数以打开文档管理页面&#10;- 在 `common/util.go` 中新增 `OpenBrowser` 函数以统一处理浏览器打开操作&#10;- 更新 `tools.go` 以使用 `OpenBrowser` 函数" />
+    <MESSAGE value="feat(ai): 添加上传文档默认路径&#10;&#10;- 在 `ai.go` 中为 `upload` 命令标志设置默认值 `C:\Users\Administrator\doc`" />
+    <MESSAGE value="feat(config, util): 添加UTF-8编码支持及确保控制台使用UTF-8代码页&#10;- 在 `config.go` 中为 `ftcli-server` 命令添加 `-Dfile.encoding=UTF-8` 等参数&#10;- 在 `util.go` 中新增 `ensureUTF8Console` 函数以确保Windows控制台使用UTF-8代码页" />
+    <MESSAGE value="feat(build): 新增构建命令及配置&#10;- 在 `root.go` 中引入 `build` 包并添加到根命令&#10;- 在 `common/util.go` 中新增 `RunCommandInDir` 和 `StartBackground` 函数&#10;- 在 `cmd/build/config.go` 中新增构建命令配置&#10;- 在 `cmd/build/build.go` 中实现构建命令逻辑" />
+    <MESSAGE value="feat(env, build): 支持后台启动模式及端口检测&#10;- 在 `env.go` 中新增后台启动逻辑，支持日志文件和端口检测&#10;- 在 `util.go` 中更新 `StartBackground` 函数，增加日志文件和端口检测功能&#10;- 在 `build.go` 中使用新的 `StartBackground` 函数并添加日志文件和端口配置" />
+    <MESSAGE value="refactor(common, cmd): 重构命令执行相关函数并移动到新文件&#10;&#10;- 将 `util.go` 中的命令执行相关函数移动到 `cmd.go`&#10;- 更新 `env.go` 和 `build.go` 中的函数调用&#10;- 删除 `util.go` 中不再使用的函数" />
+    <MESSAGE value="refactor(common): 重构进程属性设置函数并移动到新文件&#10;- 新增 `proc_unix.go` 和 `proc_windows.go` 文件，分别处理 Unix 和 Windows 下的进程属性设置&#10;- 在 `cmd.go` 中调用 `setDetachAttrs` 函数替代原有的进程属性设置代码" />
+    <MESSAGE value="refactor(env): 重构命令执行逻辑并移除同步阻塞&#10;&#10;- 移除 `sync.WaitGroup` 相关代码&#10;- 简化命令执行逻辑，去除不必要的协程和阻塞等待&#10;- 更新日志输出和错误处理" />
+    <MESSAGE value="feat(env): 新增后台服务查看及日志滚动功能&#10;- 在 `env.go` 中新增 `envListBg` 和 `envBgLog` 标志&#10;- 在 `bg.go` 中实现 `runListBgServices` 函数&#10;- 在 `bg_log.go` 中实现 `runBgLog` 函数&#10;- 在 `common/util.go` 中新增 `IsProcessRunning` 函数" />
+    <MESSAGE value="fix(env):修复后台服务日志查看逻辑及格式调整&#10;- 在 `env.go` 中更新 `envBgLog` 标志的描述和默认值&#10;- 在 `bg_log.go` 中处理 `list` 参数以列出可选服务&#10;- 在 `bg.go` 中调整表头格式以优化显示" />
+    <MESSAGE value="refactor(bg_log): 优化日志滚动输出逻辑及新增最后100行显示&#10;&#10;- 在 `tailLog` 函数中，先输出文件最后100行&#10;- 新增 `printLastNLines` 函数以实现打印文件最后N行的功能" />
+    <MESSAGE value="refactor(bg_log): 优化日志滚动功能，先输出最后100行&#10;- 在 `tailLog` 函数中新增 `printLastNLines` 逻辑，先输出文件最后100行&#10;- 调整 `tailLog` 函数内部逻辑顺序，先打印提示信息，再输出最后100行，最后移动到文件末尾并开始追踪新内容" />
+    <MESSAGE value="refactor(ai): 移除文档和工具列表功能并简化代码&#10;- 移除 `listDocs` 和 `listTools` 标志及相关逻辑&#10;- 简化 `ai.go` 中的标志设置和条件判断&#10;- 删除 `tools.go` 中的 `runListTools` 函数及其相关代码&#10;- 删除 `docs.go` 中的 `runListDocs` 函数及其相关代码" />
+    <MESSAGE value="feat(open): 新增open命令及配置&#10;- 在 `root.go` 中引入 `open` 包并添加到根命令&#10;- 在 `config.go` 中定义软件配置及系统常量&#10;- 在 `open.go` 中实现 `open` 命令及其相关逻辑" />
+    <MESSAGE value="docs: 添加 README.md 介绍项目结构和使用方法&#10;- 详细介绍项目结构、环境要求、安装与构建步骤&#10;- 说明各个命令的功能及使用示例&#10;- 提供配置说明和技术栈信息" />
+    <MESSAGE value="feat(env): 新增后台服务停止功能&#10;- 在 `env.go` 中新增 `envBgKill` 标志及处理逻辑&#10;- 新增 `bg_kill.go` 文件，实现 `runBgKill` 和 `findServiceKillConfig` 函数" />
+    <MESSAGE value="feat(chat): 新增清屏命令支持&#10;- 在 `chat.go` 中新增 `clearScreen` 函数&#10;- 添加清屏逻辑，根据操作系统执行相应命令" />
+    <MESSAGE value="refactor(ai): 移除默认文档路径设置&#10;&#10;- 移除 `ai.go` 中 `upload` 标志的默认值设置" />
+    <MESSAGE value="refactor(open): 移除未使用标志及简化逻辑&#10;- 移除 `openProgram` 和 `openAll` 标志&#10;- 简化 `openCmd` 逻辑，使用 `args` 替代 `openProgram`" />
+    <MESSAGE value="feat(open): 新增虚拟机启动配置&#10;- 在 `config.go` 中新增 `virtual` 配置项" />
+    <MESSAGE value="refactor(open): 更新微信启动配置并新增RDM配置&#10;- 将 `wechat_wake` 配置项重命名为 `we`&#10;- 在 `config.go` 中新增 `RDM` 配置项" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(open): 更新微信启动配置并新增RDM配置&#10;- 将 `wechat_wake` 配置项重命名为 `we`&#10;- 在 `config.go` 中新增 `RDM` 配置项" />
+  </component>
+</project>

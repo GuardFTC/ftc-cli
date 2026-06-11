@@ -63,6 +63,7 @@ ftcli env -p ftcli                 # 启动 ftcli 项目环境
 ftcli env -l                       # 列出内置项目及配置
 ftcli env -b                       # 查看所有后台服务运行状态
 ftcli env --bl ftcli               # 滚动查看指定服务日志
+ftcli env --bk ftcli               # 停止指定后台服务
 ```
 
 **内置项目（Windows）**
@@ -142,14 +143,13 @@ ftcli sql -p <目录> -c file.csv    # 指定 CSV 所在目录
 ```bash
 ftcli ai -l                        # 本地文库流式聊天
 ftcli ai -w                        # 网络检索流式聊天
-ftcli ai -u                        # 上传文档（默认路径：C:\Users\Administrator\doc）
 ftcli ai -u <路径>                 # 上传指定文件/目录
 ftcli ai -f                        # 打开文档管理页面
 ftcli ai -t                        # 打开工具管理页面
 ftcli ai -s http://localhost:6680  # 指定后端地址
 ```
 
-聊天模式中输入 `exit` 或按 `Ctrl+C` 退出。
+聊天模式中输入 `exit` 或按 `Ctrl+C` 退出，输入 `clear` 清屏。
 
 ---
 
@@ -160,7 +160,8 @@ ftcli ai -s http://localhost:6680  # 指定后端地址
 ```bash
 ftcli open                         # 启动所有默认软件
 ftcli open -l                      # 列出支持的软件
-ftcli open -p idea,datagrip        # 启动指定软件（逗号分隔）
+ftcli open goland                  # 启动指定软件
+ftcli open goland webstorm         # 启动多个软件（空格分隔）
 ```
 
 **内置软件（Windows）**
