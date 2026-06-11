@@ -166,10 +166,10 @@ ftcli open goland webstorm         # 启动多个软件（空格分隔）
 
 **内置软件（Windows）**
 
-| 软件 | 默认启动 |
-|------|----------|
+| 软件                                                                       | 默认启动 |
+|--------------------------------------------------------------------------|----------|
 | edge、v2ray、docker、wechat、idea、datagrip、kiro、apipost、yuque、typora、sublime | true |
-| chrome、goland、webstorm、cursor、wechat_wake | false |
+| chrome、goland、webstorm、cursor、wechat_wake、virtual、RDM                    | false |
 
 ---
 
