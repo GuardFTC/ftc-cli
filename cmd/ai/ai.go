@@ -12,6 +12,7 @@ var (
 	uploadDoc string
 	toolsWeb  bool
 	docsWeb   bool
+	skillsWeb bool
 	baseURL   string
 )
 
@@ -24,7 +25,8 @@ func NewAiCommand() *cobra.Command {
 	aiCmd.Flags().StringVarP(&uploadDoc, "upload", "u", "", "上传文档(支持本地文件/目录路径，网络/Github文档URL 常用路径: C:\\Users\\Administrator\\doc-embedding )")
 	aiCmd.Flags().BoolVarP(&toolsWeb, "tools", "t", false, "打开AI工具管理页面")
 	aiCmd.Flags().BoolVarP(&docsWeb, "docs", "f", false, "打开AI文档管理页面")
-	aiCmd.Flags().StringVarP(&baseURL, "server", "s", defaultBaseURL, "后端服务地址")
+	aiCmd.Flags().BoolVarP(&skillsWeb, "skills", "s", false, "打开AI技能管理页面")
+	aiCmd.Flags().StringVarP(&baseURL, "server", "S", defaultBaseURL, "后端服务地址")
 
 	//2.返回
 	return aiCmd
@@ -48,6 +50,8 @@ var aiCmd = &cobra.Command{
 			runDocsWeb()
 		case toolsWeb:
 			runToolsWeb()
+		case skillsWeb:
+			runSkillsWeb()
 		default:
 			cmd.Help()
 		}

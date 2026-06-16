@@ -146,9 +146,13 @@ func RunCommandBackgroundNoCheck(command string, args ...string) error {
 	//2.设置进程属性，使子进程完全独立于父进程
 	setDetachAttrs(cmd)
 
-	//3.不绑定标准输入输出
-	cmd.Stdout = nil
-	cmd.Stderr = nil
+	//3.丢弃子进程的标准输出和错误输出，防止污染父进程终端
+	devNull, err := os.OpenFile(os.DevNull, os.O_WRONLY, 0)
+	if err == nil {
+		cmd.Stdout = devNull
+		cmd.Stderr = devNull
+		defer devNull.Close()
+	}
 	cmd.Stdin = nil
 
 	//4.启动进程，不等待结束
