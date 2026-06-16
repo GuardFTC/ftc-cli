@@ -144,7 +144,8 @@ ftcli ai -w                # 网络检索流式聊天
 ftcli ai -u <路径>         # 上传文档到知识库
 ftcli ai -f                # 浏览器打开文档管理页面
 ftcli ai -t                # 浏览器打开工具管理页面
-ftcli ai -s <地址>         # 指定后端地址（默认 localhost:6680）
+ftcli ai -s                # 浏览器打开技能管理页面
+ftcli ai -S <地址>         # 指定后端地址（默认 localhost:6680）
 ```
 
 聊天模式：输入 `exit` 或 `Ctrl+C` 退出，`clear` 清屏。输出自动做 Markdown → ANSI 颜色转换（标题黄色、代码青色、引用灰色）。
