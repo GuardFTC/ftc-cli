@@ -110,6 +110,11 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 			Args:    []string{},
 			Always:  false,
 		},
+		"draw.io": {
+			Command: "D:\\soft\\drawio\\draw.io\\draw.io.exe",
+			Args:    []string{},
+			Always:  false,
+		},
 	},
 	mac: {},
 }
