@@ -6,7 +6,7 @@ import (
 	"os"
 	"text/tabwriter"
 
-	"go-ftc-console/common"
+	"ftcli/common"
 )
 
 // runListBgServices 查看所有后台运行进程状态

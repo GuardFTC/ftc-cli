@@ -3,7 +3,7 @@ package ai
 
 import (
 	"fmt"
-	"go-ftc-console/common"
+	"ftcli/common"
 )
 
 // runSkillsWeb 打开技能管理页面

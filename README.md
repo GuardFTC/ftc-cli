@@ -3,7 +3,7 @@
 个人开发 CLI 工具，用于自动化日常开发工作流：环境启动、项目构建、Maven 打包、CSV 转 SQL、AI 助手、常用软件一键打开。
 
 ```
-go-ftc-console/
+ftcli/
 ├── main.go              # 入口
 ├── cmd/
 │   ├── root.go          # 根命令 ftcli (v1.0.0)

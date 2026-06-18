@@ -4,7 +4,7 @@ package ai
 import (
 	"encoding/json"
 	"fmt"
-	"go-ftc-console/common"
+	"ftcli/common"
 )
 
 // EmbeddingUploadPayload 文档上传请求体

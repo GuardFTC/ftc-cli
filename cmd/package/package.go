@@ -7,7 +7,7 @@ import (
 	"os"
 	"text/tabwriter"
 
-	"go-ftc-console/common"
+	"ftcli/common"
 
 	"github.com/spf13/cobra"
 )

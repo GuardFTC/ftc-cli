@@ -2,12 +2,12 @@
 package cmd
 
 import (
-	"go-ftc-console/cmd/ai"
-	"go-ftc-console/cmd/build"
-	"go-ftc-console/cmd/env"
-	"go-ftc-console/cmd/open"
-	_package "go-ftc-console/cmd/package"
-	"go-ftc-console/cmd/sql"
+	"ftcli/cmd/ai"
+	"ftcli/cmd/build"
+	"ftcli/cmd/env"
+	"ftcli/cmd/open"
+	_package "ftcli/cmd/package"
+	"ftcli/cmd/sql"
 	"os"
 
 	"github.com/spf13/cobra"

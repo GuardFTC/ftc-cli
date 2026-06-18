@@ -1,4 +1,4 @@
-module go-ftc-console
+module ftcli
 
 go 1.24.0
 

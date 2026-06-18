@@ -39,7 +39,7 @@ var buildCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"-Dhttps.proxyPort=10808",
 				"-jar", "C:\\Users\\Administrator\\project\\java\\ftcli\\target\\ftcli-0.0.1-SNAPSHOT.jar",
 			},
-			"go-source": {"C:\\Users\\Administrator\\project\\go\\src\\go-ftc-console"},
+			"go-source": {"C:\\Users\\Administrator\\project\\go\\src\\ftcli"},
 			"go-output": {"..\\..\\bin\\ftcli.exe"},
 		},
 	},

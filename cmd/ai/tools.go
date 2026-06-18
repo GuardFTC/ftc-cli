@@ -3,7 +3,7 @@ package ai
 
 import (
 	"fmt"
-	"go-ftc-console/common"
+	"ftcli/common"
 )
 
 // runToolsWeb 打开工具管理页面

@@ -6,7 +6,7 @@ import (
 	"encoding/csv"
 	"errors"
 	"fmt"
-	"go-ftc-console/common"
+	"ftcli/common"
 	"os"
 	"strings"
 	"text/tabwriter"

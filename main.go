@@ -1,6 +1,6 @@
 package main
 
-import "go-ftc-console/cmd"
+import "ftcli/cmd"
 
 func main() {
 

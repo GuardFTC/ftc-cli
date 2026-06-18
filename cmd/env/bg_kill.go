@@ -4,7 +4,7 @@ package env
 import (
 	"fmt"
 
-	"go-ftc-console/common"
+	"ftcli/common"
 )
 
 // runBgKill 停止后台服务
