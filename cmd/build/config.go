@@ -25,10 +25,10 @@ const typeAll = "all"
 var buildCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	windows: {
 		"ftcli": {
-			"java-kill":  {"java", "ftcli"},
-			"java-pom":   {"C:\\Users\\Administrator\\project\\java\\ftcli\\pom.xml"},
+			"java-kill":  {"java", "ftcli-ai-server"},
+			"java-pom":   {"C:\\Users\\Administrator\\project\\java\\ftcli-ai-server\\pom.xml"},
 			"java-maven": {"C:\\Users\\Administrator\\maven\\apache-maven-3.9.9-bin\\apache-maven-3.9.9\\conf\\settings.xml"},
-			"java-log":   {"C:\\Users\\Administrator\\project\\java\\logs\\ftcli-server.log"},
+			"java-log":   {"C:\\Users\\Administrator\\project\\java\\logs\\ftcli-ai-server.log"},
 			"java-port":  {"6680"},
 			"java-start": {
 				"java",
@@ -37,7 +37,7 @@ var buildCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"-Dstderr.encoding=UTF-8",
 				"-Dhttps.proxyHost=127.0.0.1",
 				"-Dhttps.proxyPort=10808",
-				"-jar", "C:\\Users\\Administrator\\project\\java\\ftcli\\target\\ftcli-0.0.1-SNAPSHOT.jar",
+				"-jar", "C:\\Users\\Administrator\\project\\java\\ftcli-ai-server\\target\\ftcli-ai-server-0.0.1-SNAPSHOT.jar",
 			},
 			"go-source": {"C:\\Users\\Administrator\\project\\go\\src\\ftcli"},
 			"go-output": {"..\\..\\bin\\ftcli.exe"},
