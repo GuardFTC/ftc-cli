@@ -168,7 +168,7 @@ ftcli open goland webstorm
 | 默认启动 | 软件 |
 |----------|------|
 | ✓ | edge、v2ray、docker、wechat、idea、datagrip、kiro、apipost、yuque、typora、sublime |
-| ✗ | chrome、goland、webstorm、cursor、we、virtual、RDM |
+| ✗ | chrome、goland、webstorm、cursor、we、virtual、RDM、draw.io |
 
 ---
 
