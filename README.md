@@ -10,10 +10,11 @@ ftcli/
 │   ├── ai/              # AI 助手（对接 ftcli 后端）
 │   ├── build/           # 构建流水线（kill → package → start）
 │   ├── env/             # 开发环境启动
+│   ├── monitor/         # 系统资源监控（内存/CPU）
 │   ├── open/            # 常用软件启动
 │   ├── package/         # Java Maven 打包
 │   └── sql/             # CSV → SQL 转换
-└── common/              # 公共工具（命令执行、进程管理、浏览器打开等）
+└── util/                # 公共工具（命令执行、进程管理、浏览器打开等）
 ```
 
 ## 环境要求
@@ -46,6 +47,7 @@ ftcli build -p ftcli -t go
 | `ftcli sql` | CSV 数据转换为 INSERT SQL |
 | `ftcli ai` | AI 助手（流式聊天 / 文档上传 / 管理页面） |
 | `ftcli open` | 一键打开常用开发软件 |
+| `ftcli monitor` | 系统资源监控（内存/CPU） |
 
 ---
 
@@ -172,6 +174,35 @@ ftcli open goland webstorm
 
 ---
 
+## ftcli monitor
+
+系统资源监控，输出内存和 CPU 使用情况，带进度条和多核利用率分列展示。
+
+```bash
+ftcli monitor              # 输出内存 + CPU 全部信息
+ftcli monitor -m           # 仅输出内存信息
+ftcli monitor -c           # 仅输出 CPU 信息
+```
+
+**输出示例**
+
+```
+=== MEMORY MONITOR =============================================================
+Total      :   31.77 GB  [████████████████░░░░░░░░]  80.00%
+Used       :   25.61 GB
+Available  :    6.16 GB
+=== CPU MONITOR ================================================================
+Cores (P/L): 12 / 20                                       Total Usage:   2.01%
+Core 00:   0.52% | Core 05:   0.00% | Core 10:   1.04% | Core 15:   0.00%
+Core 01:   0.00% | Core 06:   0.00% | Core 11:   0.00% | Core 16:   5.18%
+Core 02:   0.00% | Core 07:   0.00% | Core 12:   0.00% | Core 17:   0.52%
+Core 03:   0.00% | Core 08:   4.66% | Core 13:   0.00% | Core 18:  15.03%
+Core 04:   0.00% | Core 09:   0.00% | Core 14:   1.04% | Core 19:  12.44%
+================================================================================
+```
+
+---
+
 ## 配置说明
 
 各子命令的配置集中在对应 `config.go` 中，按 `runtime.GOOS` 区分系统。修改路径、端口、进程关键字等直接编辑即可，无需改业务逻辑。
@@ -193,3 +224,10 @@ ftcli open goland webstorm
 |----|------|
 | [cobra](https://github.com/spf13/cobra) | CLI 框架 |
 | [gopsutil/v3](https://github.com/shirou/gopsutil) | 进程管理（kill、端口检测） |
+| [gopsutil/v4](https://github.com/shirou/gopsutil) | 系统资源监控（内存/CPU） |
+
+---
+
+## 作者
+
+冯铁城 — 17615007230@163.com
