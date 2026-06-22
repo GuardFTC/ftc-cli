@@ -3,12 +3,11 @@ package open
 
 import (
 	"fmt"
+	"ftcli/util"
 	"log"
 	"os"
 	"strings"
 	"text/tabwriter"
-
-	"ftcli/common"
 
 	"github.com/spf13/cobra"
 )
@@ -135,7 +134,7 @@ func openApp(name string, config AppConfig) {
 	fmt.Printf(">>> 启动 %s\n", name)
 
 	//2.后台启动，不检测存活
-	if err := common.RunCommandBackgroundNoCheck(config.Command, config.Args...); err != nil {
+	if err := util.RunCommandBackgroundNoCheck(config.Command, config.Args...); err != nil {
 		fmt.Printf("    启动失败: %v\n", err)
 	}
 }

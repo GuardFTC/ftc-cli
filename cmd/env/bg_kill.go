@@ -3,8 +3,7 @@ package env
 
 import (
 	"fmt"
-
-	"ftcli/common"
+	"ftcli/util"
 )
 
 // runBgKill 停止后台服务
@@ -26,7 +25,7 @@ func runBgKill(serviceName string) {
 
 	//3.执行kill
 	fmt.Printf(">>> 停止服务: %s\n", serviceName)
-	if err := common.KillProcess(killName, killKeyword); err != nil {
+	if err := util.KillProcess(killName, killKeyword); err != nil {
 		fmt.Printf("停止失败: %v\n", err)
 		return
 	}

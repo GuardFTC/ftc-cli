@@ -3,7 +3,7 @@ package ai
 
 import (
 	"fmt"
-	"ftcli/common"
+	"ftcli/util"
 )
 
 // runSkillsWeb 打开技能管理页面
@@ -13,7 +13,7 @@ func runSkillsWeb() {
 	url := baseURL + "/skills.html"
 
 	//2.打开浏览器
-	if err := common.OpenBrowser(url); err != nil {
+	if err := util.OpenBrowser(url); err != nil {
 		fmt.Printf("打开浏览器失败: %v\n", err)
 		return
 	}

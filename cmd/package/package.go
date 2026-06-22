@@ -3,11 +3,10 @@ package _package
 
 import (
 	"fmt"
+	"ftcli/util"
 	"log"
 	"os"
 	"text/tabwriter"
-
-	"ftcli/common"
 
 	"github.com/spf13/cobra"
 )
@@ -110,10 +109,10 @@ func runPackageCommand() {
 func killProjectProcess(project map[string][]string) error {
 
 	//1.获取kill配置项
-	killItems := common.GetProjectItems(project, "kill")
+	killItems := util.GetProjectItems(project, "kill")
 
 	//2.杀死项目进程
-	if err := common.KillProcess(killItems[0], killItems[1]); err != nil {
+	if err := util.KillProcess(killItems[0], killItems[1]); err != nil {
 		return err
 	}
 
@@ -126,13 +125,13 @@ func getMavenCommands(systemProject map[string][]string) [][]string {
 
 	//1.如果自定义项目配置为空，那么使用项目配置覆盖自定义配置
 	if packagePom == "" {
-		packagePom = common.GetProjectItems(systemProject, "pom")[0]
+		packagePom = util.GetProjectItems(systemProject, "pom")[0]
 	}
 	if packageMaven == "" {
-		packageMaven = common.GetProjectItems(systemProject, "maven")[0]
+		packageMaven = util.GetProjectItems(systemProject, "maven")[0]
 	}
 	if packageOutput == "" {
-		packageOutput = common.GetProjectItems(systemProject, "output")[1]
+		packageOutput = util.GetProjectItems(systemProject, "output")[1]
 	}
 
 	//2.定义公共参数，减少代码重复
@@ -163,7 +162,7 @@ func runMavenCommands(commands [][]string) error {
 		fmt.Printf(">>> 执行第%d条命令: mvn %v\n", i+1, args)
 
 		//3.执行命令，出错则打印并退出
-		if err := common.RunCommand("mvn", args...); err != nil {
+		if err := util.RunCommand("mvn", args...); err != nil {
 			fmt.Printf("命令执行失败: %v\n", err)
 			return err
 		}
@@ -183,10 +182,10 @@ func runMavenCommands(commands [][]string) error {
 func openOutPutDir(project map[string][]string) error {
 
 	//1.获取output项
-	openCommand := common.GetProjectItems(project, "output")[0]
+	openCommand := util.GetProjectItems(project, "output")[0]
 
 	//2.执行命令打开文件夹
-	if err := common.RunCommand(openCommand, packageOutput); err != nil {
+	if err := util.RunCommand(openCommand, packageOutput); err != nil {
 		return err
 	}
 

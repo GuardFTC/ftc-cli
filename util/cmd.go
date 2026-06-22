@@ -1,5 +1,5 @@
 // Package common @Author:冯铁城 [17615007230@163.com] 2026-06-08 14:50:54
-package common
+package util
 
 import (
 	"fmt"

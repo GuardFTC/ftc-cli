@@ -1,5 +1,5 @@
 // Package common @Author:冯铁城 [17615007230@163.com] 2025-07-18 15:03:13
-package common
+package util
 
 import (
 	"errors"

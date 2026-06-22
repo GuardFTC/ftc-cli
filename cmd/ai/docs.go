@@ -4,7 +4,7 @@ package ai
 import (
 	"encoding/json"
 	"fmt"
-	"ftcli/common"
+	"ftcli/util"
 )
 
 // EmbeddingUploadPayload 文档上传请求体
@@ -61,7 +61,7 @@ func runDocsWeb() {
 	url := baseURL + "/docs.html"
 
 	//2.打开浏览器
-	if err := common.OpenBrowser(url); err != nil {
+	if err := util.OpenBrowser(url); err != nil {
 		fmt.Printf("打开浏览器失败: %v\n", err)
 		return
 	}

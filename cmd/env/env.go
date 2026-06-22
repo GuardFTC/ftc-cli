@@ -8,8 +8,6 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"ftcli/common"
-
 	"github.com/spf13/cobra"
 )
 
@@ -119,11 +117,11 @@ func runEnvCommand() {
 
 			//6.先kill旧进程，确保幂等
 			fmt.Printf(">>> 停止已运行的%v进程...\n", property)
-			common.KillProcess(killName, killKeyword)
+			util.KillProcess(killName, killKeyword)
 
 			//7.后台启动
 			fmt.Printf(">>> 后台启动%v: %v\n", property, actualValues)
-			if err := common.RunCommandBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
+			if err := util.RunCommandBackground(logFile, checkPort, actualValues[0], actualValues[1:]...); err != nil {
 				fmt.Printf("后台启动失败: %v\n", err)
 				continue
 			}
@@ -131,7 +129,7 @@ func runEnvCommand() {
 
 			//8.前台执行命令
 			fmt.Printf(">>> 执行启动%v命令: %v\n", property, propertyValues)
-			if err := common.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
+			if err := util.RunCommand(propertyValues[0], propertyValues[1:]...); err != nil {
 				fmt.Printf("命令执行失败: %v\n", err)
 				continue
 			}

@@ -3,10 +3,9 @@ package env
 
 import (
 	"fmt"
+	"ftcli/util"
 	"os"
 	"text/tabwriter"
-
-	"ftcli/common"
 )
 
 // runListBgServices 查看所有后台运行进程状态
@@ -46,7 +45,7 @@ func runListBgServices() {
 
 			//8.检查进程是否存活
 			status := "未运行"
-			if common.IsProcessRunning(killName, killKeyword) {
+			if util.IsProcessRunning(killName, killKeyword) {
 				status = "运行中"
 			}
 

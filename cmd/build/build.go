@@ -3,12 +3,11 @@ package build
 
 import (
 	"fmt"
+	"ftcli/util"
 	"log"
 	"os"
 	"path/filepath"
 	"text/tabwriter"
-
-	"ftcli/common"
 
 	"github.com/spf13/cobra"
 )
@@ -134,7 +133,7 @@ func buildJava(projectProperties map[string][]string) {
 	//2.杀死已运行的Java进程
 	fmt.Println(">>> [Java] 停止已运行的进程...")
 	killItems := projectProperties["java-kill"]
-	if err := common.KillProcess(killItems[0], killItems[1]); err != nil {
+	if err := util.KillProcess(killItems[0], killItems[1]); err != nil {
 		log.Fatalf("停止Java进程失败: %v\n", err)
 	}
 
@@ -149,7 +148,7 @@ func buildJava(projectProperties map[string][]string) {
 	logFile := projectProperties["java-log"][0]
 	checkPort := projectProperties["java-port"][0]
 	startItems := projectProperties["java-start"]
-	if err := common.RunCommandBackground(logFile, checkPort, startItems[0], startItems[1:]...); err != nil {
+	if err := util.RunCommandBackground(logFile, checkPort, startItems[0], startItems[1:]...); err != nil {
 		fmt.Printf("Java服务启动失败: %v\n", err)
 		return
 	}
@@ -187,7 +186,7 @@ func runMavenBuild(projectProperties map[string][]string) error {
 		fmt.Printf(">>> 执行第%d条命令: mvn %v\n", i+1, args)
 
 		//6.执行命令，出错则打印并退出
-		if err := common.RunCommand("mvn", args...); err != nil {
+		if err := util.RunCommand("mvn", args...); err != nil {
 			fmt.Printf("命令执行失败: %v\n", err)
 			return err
 		}
@@ -238,7 +237,7 @@ func buildGoWindows(source string, output string) {
 
 	//2.编译到临时文件
 	fmt.Printf(">>> [Go] 编译项目: %s -> %s\n", source, tempPath)
-	if err := common.RunCommandInDir(source, "go", "build", "-o", tempPath); err != nil {
+	if err := util.RunCommandInDir(source, "go", "build", "-o", tempPath); err != nil {
 		log.Fatalf("Go编译失败: %v\n", err)
 	}
 
@@ -253,7 +252,7 @@ func buildGoWindows(source string, output string) {
 
 	//5.后台启动bat脚本（不需要检测存活）
 	fmt.Printf(">>> [Go] 延迟替换脚本已生成，当前进程退出后将自动替换 %s\n", targetPath)
-	if err := common.RunCommandBackgroundNoCheck("cmd", "/C", batPath); err != nil {
+	if err := util.RunCommandBackgroundNoCheck("cmd", "/C", batPath); err != nil {
 		log.Fatalf("启动替换脚本失败: %v\n", err)
 	}
 }
@@ -263,7 +262,7 @@ func buildGoUnix(source string, output string) {
 
 	//1.执行go build
 	fmt.Printf(">>> [Go] 编译项目: %s -> %s\n", source, output)
-	if err := common.RunCommandInDir(source, "go", "build", "-o", output); err != nil {
+	if err := util.RunCommandInDir(source, "go", "build", "-o", output); err != nil {
 		log.Fatalf("Go编译失败: %v\n", err)
 	}
 }

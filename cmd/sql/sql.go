@@ -6,7 +6,7 @@ import (
 	"encoding/csv"
 	"errors"
 	"fmt"
-	"ftcli/common"
+	"ftcli/util"
 	"os"
 	"strings"
 	"text/tabwriter"
@@ -257,7 +257,7 @@ func parseRow(columns []string, row []string) []string {
 		//5.根据不同类型，进行转换并存入切片
 		//数字类型:直接存储
 		//字符串:转义单引号 + 加引号
-		if common.IsNumeric(cellValue) {
+		if util.IsNumeric(cellValue) {
 			values[j] = cellValue
 		} else {
 			cellValue = strings.ReplaceAll(cellValue, "'", "''")
