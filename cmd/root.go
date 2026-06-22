@@ -5,6 +5,7 @@ import (
 	"ftcli/cmd/ai"
 	"ftcli/cmd/build"
 	"ftcli/cmd/env"
+	"ftcli/cmd/monitor"
 	"ftcli/cmd/open"
 	_package "ftcli/cmd/package"
 	"ftcli/cmd/sql"
@@ -33,6 +34,7 @@ func Init() {
 	rootCmd.AddCommand(ai.NewAiCommand())
 	rootCmd.AddCommand(build.NewBuildCommand())
 	rootCmd.AddCommand(open.NewOpenCommand())
+	rootCmd.AddCommand(monitor.NewMonitorCommand())
 
 	//3.执行根命令
 	if err := rootCmd.Execute(); err != nil {
