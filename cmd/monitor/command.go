@@ -150,7 +150,7 @@ func buildProgressBar(percent float64) string {
 func printSectionHeader(title string) {
 
 	//1.计算标题后需要填充的等号数量
-	prefix := "=== " + title + " "
+	prefix := "================================ " + title + " "
 	padLen := lineWidth - len(prefix)
 	if padLen < 0 {
 		padLen = 0
