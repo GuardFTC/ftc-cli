@@ -9,10 +9,14 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/shirou/gopsutil/v3/process"
 )
+
+// utf8Once 确保UTF-8代码页设置只执行一次
+var utf8Once sync.Once
 
 // RunCommand 封装执行命令的函数，传入命令名和参数，返回错误
 func RunCommand(command string, args ...string) error {
@@ -167,10 +171,12 @@ func RunCommandBackgroundNoCheck(command string, args ...string) error {
 	return nil
 }
 
-// ensureUTF8Console 确保Windows控制台使用UTF-8代码页，解决中文乱码问题
+// ensureUTF8Console 确保Windows控制台使用UTF-8代码页，解决中文乱码问题（仅执行一次）
 func ensureUTF8Console() {
 	if runtime.GOOS == "windows" {
-		exec.Command("cmd", "/C", "chcp", "65001").Run()
+		utf8Once.Do(func() {
+			exec.Command("cmd", "/C", "chcp", "65001").Run()
+		})
 	}
 }
 
