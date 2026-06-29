@@ -67,6 +67,16 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 				"-jar", "C:\\Users\\Administrator\\project\\java\\ftcli-ai-server\\target\\ftcli-ai-server-0.0.1-SNAPSHOT.jar",
 			},
 		},
+		"dolp": {
+			"zookeeper": {
+				"background",
+				"C:\\Users\\Administrator\\project\\java\\logs\\zookeeper.log",
+				"2181",
+				"java", "zookeeper",
+				"cmd",
+				"/C", "C:\\Users\\Administrator\\base\\zookeeper\\apache-zookeeper-3.8.6-bin\\bin\\zkServer.cmd",
+			},
+		},
 	},
 	mac: {
 		defaultProject: {
