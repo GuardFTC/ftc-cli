@@ -80,8 +80,64 @@ var envCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	},
 	mac: {
 		defaultProject: {
-			"nacos":    {},
-			"sentinel": {},
+			"nacos": {
+				"background",
+				"/Applications/project/java/logs/nacos.log",
+				"8848",
+				"java", "nacos",
+				"bash",
+				"/Applications/base/nacos/nacos/bin/startup.sh",
+				"-m", "standalone",
+			},
+			"sentinel": {
+				"background",
+				"/Applications/project/java/logs/sentinel.log",
+				"8849",
+				"java", "sentinel",
+				"java",
+				"-Dserver.port=8849",
+				"-Dcsp.sentinel.dashboard.server=0.0.0.0:8849",
+				"-Dproject.name=Platform",
+				"-Dsentinel.dashboard.auth.username=platform",
+				"-Dsentinel.dashboard.auth.password=VI7O8ezi18kaYiQupoT2tohAw4mOLi",
+				"-jar", "/Applications/base/sentinel/sentinel-dashboard-1.8.8.jar",
+			},
+			"redis": {
+				"docker",
+				"start", "redis-dev",
+			},
+		},
+		"ftcli": {
+			"redis": {
+				"docker",
+				"start", "redis-dev",
+			},
+			"chroma": {
+				"docker",
+				"start", "chroma-server",
+			},
+			"ftcli": {
+				"background",
+				"/Applications/project/java/logs/ftcli-ai-server.log",
+				"6680",
+				"java", "ftcli",
+				"java",
+				"-Dfile.encoding=UTF-8",
+				"-Dstdout.encoding=UTF-8",
+				"-Dstderr.encoding=UTF-8",
+				"-jar", "/Applications/project/java/ftcli-ai-server/target/ftcli-ai-server-0.0.1-SNAPSHOT.jar",
+			},
+		},
+		"dolp": {
+			"zookeeper": {
+				"background",
+				"/Applications/project/java/logs/zookeeper.log",
+				"2181",
+				"java", "zookeeper",
+				"bash",
+				"/Applications/base/zookeeper/apache-zookeeper-3.8.6-bin/bin/zkServer.sh",
+				"start",
+			},
 		},
 	},
 }

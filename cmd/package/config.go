@@ -37,10 +37,22 @@ var packageCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	},
 	mac: {
 		defaultProject: {
-			"pom":    {},
-			"maven":  {},
-			"output": {"open"},
+			"pom":    {"/Applications/project/java/prospect-platform/parent/pom.xml"},
+			"maven":  {"/Applications/base/maven/apache-maven-3.9.16/conf/settings.xml"},
+			"output": {"open", "/Applications/project/java/prospect-platform/output"},
 			"kill":   {"java", "prospect."},
+		},
+		"logging-mon": {
+			"pom":    {"/Applications/project/java/logging-mon/pom.xml"},
+			"maven":  {"/Applications/base/maven/apache-maven-3.9.16/conf/settings.xml"},
+			"output": {"open", "/Applications/project/java/logging-mon/output"},
+			"kill":   {"java", "logging-mon"},
+		},
+		"ftcli": {
+			"pom":    {"/Applications/project/java/ftcli-ai-server/pom.xml"},
+			"maven":  {"/Applications/base/maven/apache-maven-3.9.16/conf/settings.xml"},
+			"output": {"open", "/Applications/project/java/ftcli-ai-server/target"},
+			"kill":   {"java", "ftcli-ai-server"},
 		},
 	},
 }

@@ -45,12 +45,20 @@ var buildCmdProjectPropertiesMap = map[string]map[string]map[string][]string{
 	},
 	mac: {
 		"ftcli": {
-			"java-kill":  {"java", "ftcli"},
-			"java-pom":   {},
-			"java-maven": {},
-			"java-start": {},
-			"go-source":  {},
-			"go-output":  {},
+			"java-kill":  {"java", "ftcli-ai-server"},
+			"java-pom":   {"/Applications/project/java/ftcli-ai-server/pom.xml"},
+			"java-maven": {"/Applications/base/maven/apache-maven-3.9.16/conf/settings.xml"},
+			"java-log":   {"/Applications/project/java/logs/ftcli-ai-server.log"},
+			"java-port":  {"6680"},
+			"java-start": {
+				"java",
+				"-Dfile.encoding=UTF-8",
+				"-Dstdout.encoding=UTF-8",
+				"-Dstderr.encoding=UTF-8",
+				"-jar", "/Applications/project/java/ftcli-ai-server/target/ftcli-ai-server-0.0.1-SNAPSHOT.jar",
+			},
+			"go-source": {"/Applications/project/go/src/ftcli"},
+			"go-output": {"../../bin/ftcli"},
 		},
 	},
 }
