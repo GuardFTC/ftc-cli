@@ -122,6 +122,16 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 			Args:    []string{"-a", "v2rayN"},
 			Always:  true,
 		},
+		"ishot": {
+			Command: "open",
+			Args:    []string{"-a", "iShot"},
+			Always:  true,
+		},
+		"kh": {
+			Command: "open",
+			Args:    []string{"-a", "KeyboardHolder"},
+			Always:  true,
+		},
 		"edge": {
 			Command: "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
 			Args:    []string{"--restore-last-session"},
@@ -145,16 +155,21 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 		"goland": {
 			Command: "open",
 			Args:    []string{"-a", "GoLand"},
-			Always:  true,
+			Always:  false,
 		},
 		"webstorm": {
 			Command: "open",
 			Args:    []string{"-a", "WebStorm"},
-			Always:  true,
+			Always:  false,
 		},
 		"datagrip": {
 			Command: "open",
 			Args:    []string{"-a", "DataGrip"},
+			Always:  true,
+		},
+		"arm": {
+			Command: "open",
+			Args:    []string{"-a", "Another Desktop Manager"},
 			Always:  true,
 		},
 		"kiro": {
@@ -190,22 +205,7 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 		"draw.io": {
 			Command: "open",
 			Args:    []string{"-a", "draw.io"},
-			Always:  true,
-		},
-		"ishot": {
-			Command: "open",
-			Args:    []string{"-a", "iShot"},
-			Always:  true,
-		},
-		"kh": {
-			Command: "open",
-			Args:    []string{"-a", "KeyboardHolder"},
-			Always:  true,
-		},
-		"arm": {
-			Command: "open",
-			Args:    []string{"-a", "Another Desktop Manager"},
-			Always:  true,
+			Always:  false,
 		},
 		"tabby": {
 			Command: "open",
