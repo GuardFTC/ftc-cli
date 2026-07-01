@@ -116,5 +116,101 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 			Always:  false,
 		},
 	},
-	mac: {},
+	mac: {
+		"v2ray": {
+			Command: "open",
+			Args:    []string{"-a", "v2rayN"},
+			Always:  true,
+		},
+		"edge": {
+			Command: "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+			Args:    []string{"--restore-last-session"},
+			Always:  true,
+		},
+		"wechat": {
+			Command: "open",
+			Args:    []string{"-a", "WeChat"},
+			Always:  true,
+		},
+		"we": {
+			Command: "open",
+			Args:    []string{"-a", "WeChat"},
+			Always:  true,
+		},
+		"idea": {
+			Command: "open",
+			Args:    []string{"-a", "IntelliJ IDEA"},
+			Always:  true,
+		},
+		"goland": {
+			Command: "open",
+			Args:    []string{"-a", "GoLand"},
+			Always:  true,
+		},
+		"webstorm": {
+			Command: "open",
+			Args:    []string{"-a", "WebStorm"},
+			Always:  true,
+		},
+		"datagrip": {
+			Command: "open",
+			Args:    []string{"-a", "DataGrip"},
+			Always:  true,
+		},
+		"kiro": {
+			Command: "open",
+			Args:    []string{"-a", "kiro"},
+			Always:  true,
+		},
+		"apipost": {
+			Command: "open",
+			Args:    []string{"-a", "Apipost7"},
+			Always:  true,
+		},
+		"yuque": {
+			Command: "open",
+			Args:    []string{"-a", "语雀"},
+			Always:  true,
+		},
+		"typora": {
+			Command: "open",
+			Args:    []string{"-a", "Typora"},
+			Always:  true,
+		},
+		"sublime": {
+			Command: "open",
+			Args:    []string{"-a", "Sublime Text"},
+			Always:  true,
+		},
+		"docker": {
+			Command: "open",
+			Args:    []string{"-a", "Docker"},
+			Always:  true,
+		},
+		"draw.io": {
+			Command: "open",
+			Args:    []string{"-a", "draw.io"},
+			Always:  true,
+		},
+		"ishot": {
+			Command: "open",
+			Args:    []string{"-a", "iShot"},
+			Always:  true,
+		},
+		"kh": {
+			Command: "open",
+			Args:    []string{"-a", "KeyboardHolder"},
+			Always:  true,
+		},
+		"arm": {
+			Command: "open",
+			Args:    []string{"-a", "Another Desktop Manager"},
+			Always:  true,
+		},
+		"tabby": {
+			Command: "open",
+			Args:    []string{"-a", "Tabby"},
+			Always:  false,
+		},
+	},
 }
