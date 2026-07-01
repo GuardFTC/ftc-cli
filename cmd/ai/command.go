@@ -22,7 +22,7 @@ func NewAiCommand() *cobra.Command {
 	//1.设置Flags
 	aiCmd.Flags().BoolVarP(&localChat, "local", "l", false, "基于本地文库进行流式AI聊天")
 	aiCmd.Flags().BoolVarP(&webChat, "web", "w", false, "基于网络进行流式AI聊天")
-	aiCmd.Flags().StringVarP(&uploadDoc, "upload", "u", "", "上传文档(支持本地文件/目录路径，网络/Github文档URL 常用路径: C:\\Users\\Administrator\\doc-embedding )")
+	aiCmd.Flags().StringVarP(&uploadDoc, "upload", "u", "", "上传文档(支持本地文件/目录路径，网络/Github文档URL 常用路径: C:\\Users\\Administrator\\doc-embedding / /Applications/doc)")
 	aiCmd.Flags().BoolVarP(&toolsWeb, "tools", "t", false, "打开AI工具管理页面")
 	aiCmd.Flags().BoolVarP(&docsWeb, "docs", "f", false, "打开AI文档管理页面")
 	aiCmd.Flags().BoolVarP(&skillsWeb, "skills", "s", false, "打开AI技能管理页面")
