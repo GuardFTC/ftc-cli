@@ -179,7 +179,7 @@ var openCmdAppsMap = map[string]map[string]AppConfig{
 		},
 		"apipost": {
 			Command: "open",
-			Args:    []string{"-a", "Apipost7"},
+			Args:    []string{"-a", "Apipost"},
 			Always:  true,
 		},
 		"yuque": {
